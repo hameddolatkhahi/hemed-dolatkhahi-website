@@ -158,7 +158,7 @@
   }
   .hero-content {
     position: relative; z-index: 1;
-    padding: 4rem 3rem 4rem 6rem;
+    padding: 4rem 3rem 4rem 2rem;
     animation: fadeUp 0.9s ease both;
   }
   .hero-label {
@@ -215,7 +215,7 @@
   /* ── Photo avatar ── */
   .hero-avatar-wrap { position: relative; margin-bottom: 2.5rem; }
   .hero-avatar {
-    width: 300px; height: 300px; border-radius: 50%;
+    width: 220px; height: 220px; border-radius: 50%;
     object-fit: cover; object-position: center top;
     border: 3px solid var(--paper-dark);
     display: block;
@@ -412,18 +412,16 @@
     font-weight: var(--display-weight); color: var(--paper);
   }
   .testimonials-header h2 em { font-style: var(--display-style); color: var(--gold); }
-  .testimonials-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px,1fr)); gap: 1.5rem; align-items: stretch; }
+  .testimonials-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px,1fr)); gap: 1.5rem; }
   .testimonial-card {
     background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08);
     border-radius: var(--radius); padding: 2rem;
     transition: border-color var(--transition);
-    display: flex; flex-direction: column;
   }
   .testimonial-card:hover { border-color: rgba(184,146,74,0.4); }
   .testimonial-quote {
     font-family: var(--font-display); font-size: 1.08rem; font-weight: 300;
     line-height: 1.7; color: rgba(255,255,255,0.8); margin-bottom: 1.5rem; font-style: italic;
-    flex: 1;
   }
   .testimonial-quote::before { content: '\201C'; color: var(--gold); font-size: 1.5rem; line-height: 0; vertical-align: -0.4rem; margin-right: 0.2rem; }
   .testimonial-author { display: flex; align-items: center; gap: 0.75rem; }
@@ -508,6 +506,16 @@
   .contact-item-label { font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--ink-faint); font-family: var(--font-mono); display: block; }
   .contact-item-value { font-size: 0.9rem; font-weight: 500; color: var(--ink); }
 
+  .copy-email-btn {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--accent); border: 1px solid var(--accent-light);
+    background: var(--accent-light); padding: 0.4rem 0.9rem; border-radius: 100px;
+    cursor: pointer; transition: all var(--transition); margin-top: 0.5rem;
+  }
+  .copy-email-btn:hover { background: var(--accent); color: var(--white); border-color: var(--accent); }
+  .copy-email-btn.copied { background: var(--ink); color: var(--white); border-color: var(--ink); }
+
   .contact-note {
     font-size: 0.8rem; color: var(--ink-faint); font-style: italic;
     margin-top: 1.5rem; line-height: 1.6;
@@ -515,6 +523,14 @@
     border-left: 2px solid var(--accent); border-radius: 0 var(--radius) var(--radius) 0;
   }
 
+  .social-strip { display: flex; gap: 0.75rem; margin-top: 1.5rem; flex-wrap: wrap; }
+  .social-link {
+    display: flex; align-items: center; gap: 0.5rem;
+    font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--ink-soft); border: 1px solid var(--paper-dark);
+    padding: 0.4rem 0.9rem; border-radius: 100px; transition: all var(--transition);
+  }
+  .social-link:hover { background: var(--ink); border-color: var(--ink); color: var(--white); }
 
   .contact-right {}
   .contact-right h3 {
@@ -628,6 +644,30 @@
      DOWNLOADABLE FILES BAR
      Sits just above the footer. Add more .download-file links as needed.
   ══════════════════════════════════════════════ */
+  #downloads {
+    background: var(--ink);
+    padding: 1.1rem 2rem;
+  }
+  .downloads-inner {
+    max-width: var(--max-width); margin: 0 auto;
+    display: flex; align-items: center; gap: 2rem; flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  .downloads-label {
+    font-family: var(--font-mono); font-size: 0.65rem; letter-spacing: 0.16em;
+    text-transform: uppercase; color: rgba(255,255,255,0.35);
+    white-space: nowrap;
+  }
+  .downloads-files { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+  .download-file {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase;
+    color: rgba(255,255,255,0.7); border: 1px solid rgba(255,255,255,0.12);
+    padding: 0.4rem 1rem; border-radius: var(--radius);
+    transition: border-color var(--transition), color var(--transition), background var(--transition);
+  }
+  .download-file:hover { border-color: var(--accent); color: var(--white); background: rgba(200,96,42,0.18); }
+  .download-file-icon { font-size: 0.85rem; opacity: 0.8; }
 </style>
 </head>
 <body>
@@ -679,7 +719,7 @@
 ══════════════════════════════════════ -->
 <section id="hero">
   <div class="hero-bg-stripe"></div>
-  <div class="hero-content container" style="padding-left:6rem;padding-right:1rem;max-width:640px;margin:0;">
+  <div class="hero-content container" style="padding-left:2rem;padding-right:1rem;max-width:600px;margin:0;">
     <div class="hero-label">Instructional Designer · eLearning Developer</div>
     <h1 class="hero-name">Hamed<br><em>Dolatkhahi</em></h1>
     <p class="hero-title">Designing Learning Experiences that Drive Performance</p>
@@ -698,7 +738,7 @@
       -->
       <img
         class="hero-avatar"
-        src="images/photo_2026-02-13 13.26.29.jpeg"
+        src="https://drive.google.com/uc?export=view&id=1bfe9gCEnVKeiT_jkCP8AWKxov8GAROQd"
         alt="Hamed Dolatkhahi — Instructional Designer"
         loading="eager"
         onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
@@ -720,7 +760,7 @@
       <span class="eyebrow">About Me</span>
       <img
         class="about-photo"
-        src=".jpeg"
+        src="https://drive.google.com/uc?export=view&id=1bfe9gCEnVKeiT_jkCP8AWKxov8GAROQd"
         alt="Hamed Dolatkhahi"
         loading="lazy"
         onerror="this.style.display='none';"
@@ -744,19 +784,19 @@
   ICON 1 — Replace src with your Google Drive PNG link
   Format: https://drive.google.com/uc?export=view&id=YOUR_ICON_FILE_ID
 -->
-<img class="highlight-card-icon" src="images/evidence.png" alt="" aria-hidden="true" /><h4><em>Evidence-Based Design</em></h4><p>Utilizing <strong>ADDIE & SAM</strong> to bridge performance gaps. I ensure every interactive element and content piece maps directly to a measurable learning objective.</p></div>
+<img class="highlight-card-icon" src="https://drive.google.com/uc?export=view&id=1bfe9gCEnVKeiT_jkCP8AWKxov8GAROQd" alt="" aria-hidden="true" /><h4>Evidence-Based Design</h4><p>Utilizing <strong>ADDIE & SAM</strong> to bridge performance gaps. I ensure every interactive element and content piece maps directly to a measurable learning objective.</p></div>
         <div class="highlight-card"><!--
   ICON 2 — Replace src with your Google Drive PNG link
 -->
-<img class="highlight-card-icon" src="images/settings.png" alt="" aria-hidden="true" /><h4><em>Technical &amp; Authoring Fluency</em></h4><p>My engineering background enables me to master <strong>eAuthoring tools</strong> rapidly and collaborate seamlessly with LMS admins and technical SMEs.</p></div>
+<img class="highlight-card-icon" src="https://drive.google.com/uc?export=view&id=1bfe9gCEnVKeiT_jkCP8AWKxov8GAROQd" alt="" aria-hidden="true" /><h4>Technical &amp; Authoring Fluency</h4><p>My engineering background enables me to master <strong>eAuthoring tools</strong> rapidly and collaborate seamlessly with LMS admins and technical SMEs.</p></div>
         <div class="highlight-card"><!--
   ICON 3 — Replace src with your Google Drive PNG link
 -->
-<img class="highlight-card-icon" src="images/data-analysis.png" alt="" aria-hidden="true" /><h4><em>Impact &amp; Iteration</em></h4><p>From <strong>NPS to behavioral metrics</strong>, I analyze learner data to evaluate effectiveness and continuously iterate for better learning ROI.</p></div>
+<img class="highlight-card-icon" src="https://drive.google.com/uc?export=view&id=1bfe9gCEnVKeiT_jkCP8AWKxov8GAROQd" alt="" aria-hidden="true" /><h4>Impact &amp; Iteration</h4><p>From <strong>NPS to behavioral metrics</strong>, I analyze learner data to evaluate effectiveness and continuously iterate for better learning ROI.</p></div>
         <div class="highlight-card"><!--
   ICON 4 — Replace src with your Google Drive PNG link
 -->
-<img class="highlight-card-icon" src="images/standards.png" alt="" aria-hidden="true" /><h4><em>Modern Learning Standards</em></h4><p>Committed to <strong>WCAG Accessibility</strong> and evidence-based design. I build high-quality, inclusive learning experiences that meet the rigorous professional standards of the UK's <strong>academic and corporate</strong> sectors.</p></div>
+<img class="highlight-card-icon" src="https://drive.google.com/uc?export=view&id=1bfe9gCEnVKeiT_jkCP8AWKxov8GAROQd" alt="" aria-hidden="true" /><h4>Modern Learning Standards</h4><p>Committed to <strong>WCAG Accessibility</strong> and evidence-based design. I build high-quality, inclusive learning experiences that meet the rigorous professional standards of the UK's <strong>academic and corporate</strong> sectors.</p></div>
       </div>
     </div>
   </div>
@@ -1012,7 +1052,7 @@
         <div class="testimonial-author">
           <img
             class="testimonial-avatar"
-            src="images/Mehran Aliabadi.jpeg"
+            src="https://drive.google.com/uc?export=view&id=1bfe9gCEnVKeiT_jkCP8AWKxov8GAROQd"
             alt="Testimonial author"
             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
           />
@@ -1029,7 +1069,7 @@
         <div class="testimonial-author">
           <img
             class="testimonial-avatar"
-            src="images/Farzaneh Mahmoodi.jpeg"
+            src="https://drive.google.com/uc?export=view&id=1bfe9gCEnVKeiT_jkCP8AWKxov8GAROQd"
             alt="Testimonial author"
             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
           />
@@ -1046,7 +1086,7 @@
         <div class="testimonial-author">
           <img
             class="testimonial-avatar"
-            src="images/Mohammad Shahrmiany.jpeg"
+            src="https://drive.google.com/uc?export=view&id=1bfe9gCEnVKeiT_jkCP8AWKxov8GAROQd"
             alt="Testimonial author"
             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
           />
@@ -1072,27 +1112,17 @@
   <div class="container contact-grid">
     <div class="contact-left">
       <span class="eyebrow">Get in Touch</span>
-      <h2>Let's Work <em>Together</em></h2>
+      <h2>Let's Work<br><em>Together</em></h2>
       <p>I'm open to freelance projects, contract engagements, and full-time opportunities in instructional design and eLearning development — particularly in London and across the UK.</p>
 
       <div class="contact-items">
-        <!--
-          EMAIL — clicking anywhere on this row copies the address and briefly shows "Copied!".
-          Update the data-email attribute if your address ever changes.
-        -->
-        <button
-          class="contact-item contact-item-copy"
-          data-email="hamed.dolatkhahi@gmail.com"
-          onclick="copyContactEmail(this)"
-          style="width:100%;text-align:left;cursor:pointer;background:var(--white);border:1px solid var(--paper-dark);"
-          aria-label="Copy email address"
-        >
-          <div class="contact-item-icon"><img src="images/data-analysis.png" alt="" aria-hidden="true" /></div>
+        <a href="/cdn-cgi/l/email-protection#422a232f27266c262d2e2336292a232a2b02252f232b2e6c212d2f" class="contact-item">
+          <div class="contact-item-icon">✉</div>
           <div class="contact-item-text">
             <span class="contact-item-label">Email</span>
-            <span class="contact-item-value" id="email-value-display">hamed.dolatkhahi@gmail.com</span>
+            <span class="contact-item-value"><span class="__cf_email__" data-cfemail="fd959c909899d39992919c8996959c9594bd9a909c9491d39e9290">[email&#160;protected]</span></span>
           </div>
-        </button>
+        </a>
         <a href="https://linkedin.com/in/hamed-dolatkhahi" target="_blank" rel="noopener" class="contact-item">
           <div class="contact-item-icon">in</div>
           <div class="contact-item-text">
@@ -1101,12 +1131,70 @@
           </div>
         </a>
       </div>
+
+      <button class="copy-email-btn" id="copy-email-btn" onclick="copyEmail()">
+        📋 Copy Email Address
+      </button>
 <!--
       <div class="contact-note">
         I prefer being reached via email or LinkedIn — both go directly to me. I aim to reply within 1–2 business days.
       </div>
 -->
-</div>
+      <div class="social-strip">
+        <a href="https://linkedin.com/in/hamed-dolatkhahi" target="_blank" rel="noopener" class="social-link">LinkedIn</a>
+        <!-- Add more: <a href="#" class="social-link">Twitter / X</a> -->
+      </div>
+    </div>
+
+    <div class="contact-cta-block">
+      <h3>Ready to connect?</h3>
+      <p>Whether you have a project in mind, want to discuss instructional design, or are considering me for a role — I'd love to hear from you. The quickest routes are below.</p>
+      <div class="contact-cta-actions">
+        <a href="/cdn-cgi/l/email-protection#93fbf2fef6f7bdf7fcfff2e7f8fbf2fbfad3f4fef2faffbdf0fcfe" class="btn-primary" style="justify-content:center;">
+          ✉ Send me an email
+        </a>
+        <a href="https://linkedin.com/in/hamed-dolatkhahi" target="_blank" rel="noopener" class="btn-ghost" style="justify-content:center;">
+          Connect on LinkedIn →
+        </a>
+      </div>
+<!--
+            <p style="margin-top:1.5rem;font-size:0.8rem;color:var(--ink-faint);font-family:var(--font-mono);letter-spacing:0.04em;">
+        No contact form — just direct, personal communication.
+      </p>>
+-->
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     DOWNLOADABLE FILES
+     Add/remove .download-file links as needed.
+     Update href to your Google Drive download link:
+     https://drive.google.com/uc?export=download&id=YOUR_FILE_ID
+══════════════════════════════════════ -->
+<section id="downloads">
+  <div class="downloads-inner">
+    <span class="downloads-label">Downloads</span>
+    <div class="downloads-files">
+      <!--
+        RESUME PDF — replace the href with your Google Drive PDF link.
+        Use export=download to force a direct download:
+        href="https://drive.google.com/uc?export=download&id=YOUR_RESUME_FILE_ID"
+        For now it points to the photo as a placeholder.
+      -->
+      <a href="https://drive.google.com/uc?export=view&id=1bfe9gCEnVKeiT_jkCP8AWKxov8GAROQd"
+         target="_blank" rel="noopener" class="download-file">
+        <span class="download-file-icon">&#x2913;</span> Resume / CV (PDF)
+      </a>
+      <!--
+        Add more downloadable files here as needed. Example:
+        <a href="https://drive.google.com/uc?export=download&id=YOUR_ID"
+           target="_blank" rel="noopener" class="download-file">
+          &#x2913; Portfolio Deck (PDF)
+        </a>
+      -->
+    </div>
+  </div>
 </section>
 
 <!-- ══════════════════════════════════════
@@ -1189,22 +1277,14 @@
       });
     });
   });
-, 2500);
-    });
-  }
 
-  /* ── Copy email on contact-item click ── */
-  function copyContactEmail(btn) {
-    const email = btn.getAttribute('data-email');
-    navigator.clipboard.writeText(email).then(() => {
-      const display = document.getElementById('email-value-display');
-      const orig = display.textContent;
-      display.textContent = '✓ Copied!';
-      btn.style.borderColor = 'var(--accent)';
-      setTimeout(() => {
-        display.textContent = orig;
-        btn.style.borderColor = '';
-      }, 2000);
+  /* ── Copy email ── */
+  function copyEmail() {
+    navigator.clipboard.writeText('hamed.dolatkhahi@gmail.com').then(() => {
+      const btn = document.getElementById('copy-email-btn');
+      btn.textContent = '✓ Copied!';
+      btn.classList.add('copied');
+      setTimeout(() => { btn.textContent = '📋 Copy Email Address'; btn.classList.remove('copied'); }, 2500);
     });
   }
 
