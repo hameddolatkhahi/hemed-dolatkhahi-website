@@ -5,23 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Hamed Dolatkhahi — Instructional Designer & L&D Specialist</title>
 
-<!--
-  ══════════════════════════════════════════════════════
-  FONT TOGGLE SYSTEM
-  ══════════════════════════════════════════════════════
-  FONT A (current): Cormorant Garamond + DM Sans — editorial, warm serif feel
-  FONT B (alt):     Syne + DM Sans — bold geometric sans; same feel as godesignsomething.co
-  
-  To switch permanently: change data-font="A" to data-font="B" on <html> tag.
-  The toggle button in the nav lets you preview both live.
-  ══════════════════════════════════════════════════════
--->
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <!-- Font A: Cormorant Garamond (display serif) + DM Sans (body) + DM Mono (code) -->
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet" />
-<!-- Font B: Syne (bold geometric display) — godesignsomething.co aesthetic -->
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
 
 <style>
   /* ══════════════════════════════════════════════
@@ -52,32 +40,10 @@
     --display-weight: 300;
     --heading-size-hero: clamp(3rem, 6vw, 5.5rem);
     --heading-size-section: clamp(2rem, 3.5vw, 3rem);
+    /* ↓ ADJUST THIS one value to resize the About sidebar h2 independently */
+    --about-heading-size: clamp(1.6rem, 2.8vw, 2.4rem);
     --heading-lh: 1.0;
   }
-
-  /* ── Font B overrides ── */
-  html[data-font="B"] {
-    --font-display: 'Syne', sans-serif;
-    --display-style: normal;
-    --display-weight: 700;
-    --heading-size-hero: clamp(2.4rem, 5vw, 4.5rem);
-    --heading-size-section: clamp(1.6rem, 3vw, 2.5rem);
-    --heading-lh: 1.1;
-    /* Syne looks sharp at tighter tracking */
-  }
-
-  html[data-font="B"] .display-heading,
-  html[data-font="B"] h1, html[data-font="B"] h2,
-  html[data-font="B"] h3, html[data-font="B"] .hero-name,
-  html[data-font="B"] .timeline-role,
-  html[data-font="B"] .project-title,
-  html[data-font="B"] .blog-card-title,
-  html[data-font="B"] .modal h2 {
-    letter-spacing: -0.02em;
-    font-weight: 700;
-  }
-  /* Syne doesn't need italic for flair — use color instead */
-  html[data-font="B"] em { font-style: normal; }
 
   /* ══════════════════════════════════════════════
      RESET & BASE
@@ -161,16 +127,6 @@
   .nav-links a:hover, .nav-links a.active { color: var(--ink); }
   .nav-links a:hover::after, .nav-links a.active::after { right: 0; }
 
-  /* Font toggle button */
-  .font-toggle-btn {
-    font-family: var(--font-mono);
-    font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase;
-    color: var(--ink-soft); border: 1px solid var(--paper-dark);
-    padding: 0.3rem 0.7rem; border-radius: 100px;
-    transition: all var(--transition); white-space: nowrap;
-  }
-  .font-toggle-btn:hover { border-color: var(--accent); color: var(--accent); }
-
   .nav-cta {
     font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase;
     color: var(--white); background: var(--accent);
@@ -225,7 +181,6 @@
     font-family: var(--font-display); font-size: clamp(1rem, 2vw, 1.3rem);
     font-weight: 300; color: var(--ink-soft); margin-bottom: 2rem; letter-spacing: 0.02em;
   }
-  html[data-font="B"] .hero-title { font-family: var(--font-body); font-size: 1rem; font-weight: 400; }
 
   .hero-intro {
     font-size: 1rem; color: var(--ink-soft);
@@ -272,17 +227,6 @@
     animation: spin 20s linear infinite;
   }
 
-  .hero-stats {
-    display: grid; grid-template-columns: repeat(3,1fr);
-    gap: 1px; background: var(--paper-dark);
-    border: 1px solid var(--paper-dark); border-radius: var(--radius);
-    overflow: hidden; width: 100%; max-width: 360px;
-  }
-  .stat { background: var(--paper); padding: 1.25rem 1rem; text-align: center; }
-  .stat-num { font-family: var(--font-display); font-size: 2rem; font-weight: 300; color: var(--accent); line-height: 1; display: block; }
-  html[data-font="B"] .stat-num { font-weight: 700; font-size: 1.75rem; }
-  .stat-label { font-size: 0.67rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-faint); margin-top: 0.3rem; display: block; }
-
   /* ══════════════════════════════════════════════
      ABOUT
   ══════════════════════════════════════════════ */
@@ -290,7 +234,7 @@
   .about-grid { display: grid; grid-template-columns: 1fr 2fr; gap: 5rem; align-items: start; }
   .about-sidebar h2 {
     font-family: var(--font-display);
-    font-size: var(--heading-size-section);
+    font-size: var(--about-heading-size);
     font-weight: var(--display-weight); line-height: var(--heading-lh);
     margin-bottom: 1.5rem;
   }
@@ -309,26 +253,12 @@
     background: var(--paper-dark);
   }
 
-.highlight-card {
+  .highlight-card {
     background: var(--paper); border: 1px solid var(--paper-dark);
     padding: 1.25rem 1.5rem; border-radius: var(--radius);
     transition: border-color var(--transition), transform var(--transition);
   }
   .highlight-card:hover { border-color: var(--accent); transform: translateY(-2px); }
-  
-  /* Adjusted this block to handle the new image icon */
-  .highlight-card-icon { 
-    font-size: 1.3rem; 
-    margin-bottom: 0.5rem; 
-    display: block; 
-  }
-  
-  /* ADD THIS: Forces the image to be the same size as the original emoji */
-  .highlight-card-icon img {
-    height: 1.3rem; /* Matches the font-size of the original icon span */
-    width: auto;
-    display: block;
-  }
 
   .highlight-card h4 { font-size: 0.82rem; font-weight: 500; letter-spacing: 0.04em; margin-bottom: 0.3rem; }
   .highlight-card p { font-size: 0.82rem; color: var(--ink-soft); line-height: 1.6; margin: 0; }
@@ -356,15 +286,13 @@
   .skills-panel.active { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px,1fr)); gap: 1rem; animation: fadeUp 0.35s ease; }
   .skill-chip {
     background: var(--white); border: 1px solid var(--paper-dark);
-    padding: 1rem 1.25rem; border-radius: var(--radius);
-    display: flex; flex-direction: column; gap: 0.5rem;
+    padding: 0.75rem 1.1rem; border-radius: var(--radius);
+    display: flex; flex-direction: column; gap: 0;
     transition: border-color var(--transition), transform var(--transition), box-shadow var(--transition);
   }
   .skill-chip:hover { border-color: var(--accent); transform: translateY(-2px); box-shadow: 0 4px 16px rgba(200,96,42,0.1); }
   .skill-chip-name { font-size: 0.88rem; font-weight: 500; color: var(--ink); }
-  .skill-chip-level { height: 2px; background: var(--paper-dark); border-radius: 2px; overflow: hidden; }
-  .skill-chip-fill { height: 100%; background: var(--accent); border-radius: 2px; }
-  .skill-chip-meta { font-size: 0.68rem; color: var(--ink-faint); font-family: var(--font-mono); }
+
 
   /* ══════════════════════════════════════════════
      EXPERIENCE
@@ -495,7 +423,6 @@
     font-family: var(--font-display); font-size: 1.08rem; font-weight: 300;
     line-height: 1.7; color: rgba(255,255,255,0.8); margin-bottom: 1.5rem; font-style: italic;
   }
-  html[data-font="B"] .testimonial-quote { font-family: var(--font-body); font-style: normal; font-size: 0.95rem; }
   .testimonial-quote::before { content: '\201C'; color: var(--gold); font-size: 1.5rem; line-height: 0; vertical-align: -0.4rem; margin-right: 0.2rem; }
   .testimonial-author { display: flex; align-items: center; gap: 0.75rem; }
   .testimonial-avatar {
@@ -660,11 +587,7 @@
   .modal-section { margin-bottom: 1.5rem; }
   .modal-section-label { font-family: var(--font-mono); font-size: 0.63rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent); display: block; margin-bottom: 0.4rem; }
   .modal-section-content { font-size: 0.9rem; color: var(--ink-soft); line-height: 1.7; }
-  .modal-results { display: grid; grid-template-columns: repeat(3,1fr); gap: 1rem; margin-top: 0.5rem; }
-  .modal-result-item { text-align: center; padding: 1rem; background: var(--paper); border-radius: var(--radius); }
-  .modal-result-num { font-family: var(--font-display); font-size: 1.75rem; color: var(--accent); display: block; }
-  .modal-result-label { font-size: 0.72rem; color: var(--ink-soft); }
-  .modal-screenshot-area { background: var(--paper-mid); aspect-ratio: 16/9; border-radius: var(--radius); display: flex; align-items: center; justify-content: center; font-size: 0.82rem; color: var(--ink-faint); margin-top: 0.5rem; font-family: var(--font-mono); letter-spacing: 0.06em; }
+
 
   /* ══════════════════════════════════════════════
      ANIMATIONS & MOBILE
@@ -682,7 +605,7 @@
     .about-highlights { grid-template-columns: 1fr; }
   }
   @media (max-width: 640px) {
-    .nav-links, .font-toggle-btn { display: none; }
+    .nav-links { display: none; }
     .nav-hamburger { display: flex; }
     .projects-grid, .blog-grid { grid-template-columns: 1fr; }
   }
@@ -696,6 +619,55 @@
   .mobile-nav a { font-family: var(--font-display); font-size: 2rem; font-weight: var(--display-weight); color: var(--ink); transition: color var(--transition); }
   .mobile-nav a:hover { color: var(--accent); }
   .mobile-nav-close { position: absolute; top: 1.25rem; right: 1.5rem; font-size: 1.5rem; color: var(--ink-soft); cursor: pointer; background: none; border: none; }
+
+  /* ── Highlight card PNG icon ── */
+  .highlight-card-icon {
+    width: 36px; height: 36px; margin-bottom: 0.6rem; display: block;
+    object-fit: contain;
+    /* mix-blend-mode blends PNG icons with the card background naturally */
+    mix-blend-mode: multiply;
+    opacity: 0.75;
+  }
+
+  /* ── Resume nav button ── */
+  .nav-resume {
+    font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--ink); border: 1px solid var(--paper-dark);
+    padding: 0.35rem 0.85rem; border-radius: var(--radius);
+    display: inline-flex; align-items: center; gap: 0.4rem;
+    transition: border-color var(--transition), color var(--transition);
+    white-space: nowrap;
+  }
+  .nav-resume:hover { border-color: var(--accent); color: var(--accent); }
+
+  /* ══════════════════════════════════════════════
+     DOWNLOADABLE FILES BAR
+     Sits just above the footer. Add more .download-file links as needed.
+  ══════════════════════════════════════════════ */
+  #downloads {
+    background: var(--ink);
+    padding: 1.1rem 2rem;
+  }
+  .downloads-inner {
+    max-width: var(--max-width); margin: 0 auto;
+    display: flex; align-items: center; gap: 2rem; flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  .downloads-label {
+    font-family: var(--font-mono); font-size: 0.65rem; letter-spacing: 0.16em;
+    text-transform: uppercase; color: rgba(255,255,255,0.35);
+    white-space: nowrap;
+  }
+  .downloads-files { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+  .download-file {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase;
+    color: rgba(255,255,255,0.7); border: 1px solid rgba(255,255,255,0.12);
+    padding: 0.4rem 1rem; border-radius: var(--radius);
+    transition: border-color var(--transition), color var(--transition), background var(--transition);
+  }
+  .download-file:hover { border-color: var(--accent); color: var(--white); background: rgba(200,96,42,0.18); }
+  .download-file-icon { font-size: 0.85rem; opacity: 0.8; }
 </style>
 </head>
 <body>
@@ -705,17 +677,26 @@
 ══════════════════════════════════════ -->
 <nav id="site-nav">
   <div class="container nav-inner">
-    <a href="#hero" class="nav-logo">Hamed <span>Dolatkhahi</span></a>
+    <a href="#hero" class="nav-logo" style="display:flex;flex-direction:column;line-height:1.15;gap:0.05rem;">
+      <span>Hamed <span style="color:var(--accent);">Dolatkhahi</span></span>
+      <span style="font-size:0.55rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-faint);font-family:var(--font-mono);font-weight:400;">Instructional Designer &amp; eLearning Developer</span>
+    </a>
     <ul class="nav-links">
       <li><a href="#about">About</a></li>
       <li><a href="#skills">Skills</a></li>
       <li><a href="#experience">Experience</a></li>
       <li><a href="#projects">Projects</a></li>
-      <li><a href="#blog">Writing</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
     <div class="nav-right">
-      <button class="font-toggle-btn" id="font-toggle" title="Switch font style">Font: A (Serif)</button>
+      <!--
+        RESUME BUTTON — update href to your Google Drive PDF link when ready.
+        Format: https://drive.google.com/uc?export=download&id=YOUR_FILE_ID
+      -->
+      <a href="https://drive.google.com/uc?export=view&id=1bfe9gCEnVKeiT_jkCP8AWKxov8GAROQd"
+         target="_blank" rel="noopener" class="nav-resume">
+        &#x2913; Resume
+      </a>
       <a href="#contact" class="nav-cta">Get in Touch</a>
       <button class="nav-hamburger" id="hamburger" aria-label="Open menu">
         <span></span><span></span><span></span>
@@ -730,7 +711,6 @@
   <a href="#skills" onclick="closeMobile()">Skills</a>
   <a href="#experience" onclick="closeMobile()">Experience</a>
   <a href="#projects" onclick="closeMobile()">Projects</a>
-  <a href="#blog" onclick="closeMobile()">Writing</a>
   <a href="#contact" onclick="closeMobile()">Contact</a>
 </div>
 
@@ -758,7 +738,7 @@
       -->
       <img
         class="hero-avatar"
-        src="images/photo_2026-02-13 13.26.29.jpeg"
+        src="https://drive.google.com/uc?export=view&id=1bfe9gCEnVKeiT_jkCP8AWKxov8GAROQd"
         alt="Hamed Dolatkhahi — Instructional Designer"
         loading="eager"
         onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
@@ -767,9 +747,6 @@
       <div style="display:none;width:220px;height:220px;border-radius:50%;background:var(--paper-dark);align-items:center;justify-content:center;font-family:var(--font-display);font-size:3.5rem;color:var(--ink-faint);border:3px solid var(--paper-dark);">HD</div>
       <div class="hero-avatar-ring"></div>
     </div>
-
-    <div class="hero-stats">
-      <div class="stat"><span class="stat-num">9+</span><span class="stat-label">Years</span></div>
     </div>
   </div>
 </section>
@@ -783,7 +760,7 @@
       <span class="eyebrow">About Me</span>
       <img
         class="about-photo"
-        src="images/photo_2026-02-13 13.26.29.jpeg"
+        src="https://drive.google.com/uc?export=view&id=1bfe9gCEnVKeiT_jkCP8AWKxov8GAROQd"
         alt="Hamed Dolatkhahi"
         loading="lazy"
         onerror="this.style.display='none';"
@@ -803,22 +780,23 @@
 
       <p>Now based in London and completing my Professional Diploma with the Digital Learning Institute, I am focusing on high-impact Instructional Design and eLearning Development. This portfolio showcases my current work in creating scenario-based modules, interactive prototypes (Genially/Storyline), and micro-learning assets that solve real-world performance gaps.</p>
       <div class="about-highlights">
-        <div class="highlight-card">
-          <span class="highlight-card-icon">
-                        <img src="images/evidence.png" alt="evidence icon" class="inline-icon">
-          </span><h4>Evidence-Based Design</h4><p>Utilizing <strong>ADDIE & SAM</strong> to bridge performance gaps. I ensure every interactive element and content piece maps directly to a measurable learning objective.</p></div>
-        <div class="highlight-card">
-          <span class="highlight-card-icon">
-                        <img src="images/settings.png" alt="eAuthoring tools icon" class="inline-icon">
-          </span><h4>Technical & Authoring Fluency</h4><p>My engineering background enables me to master <strong>eAuthoring tools</strong> rapidly and collaborate seamlessly with LMS admins and technical SMEs.</p></div>
-        <div class="highlight-card">
-          <span class="highlight-card-icon">
-                        <img src="images/data-analysis.png" alt="metrics icon" class="inline-icon">
-          </span><h4>Impact & Iteration</h4><p>From <strong>NPS to behavioral metrics</strong>, I analyze learner data to evaluate effectiveness and continuously iterate for better learning ROI.</p></div>
-        <div class="highlight-card">
-          <span class="highlight-card-icon">
-                        <img src="images/standards.png" alt="standards icon" class="inline-icon">
-          </span><h4>Modern Learning Standards</h4><p>Committed to <strong>WCAG Accessibility</strong> and evidence-based design. I build high-quality, inclusive learning experiences that meet the rigorous professional standards of the UK's <strong>academic and corporate</strong> sectors.</p></div>
+        <div class="highlight-card"><!--
+  ICON 1 — Replace src with your Google Drive PNG link
+  Format: https://drive.google.com/uc?export=view&id=YOUR_ICON_FILE_ID
+-->
+<img class="highlight-card-icon" src="https://drive.google.com/uc?export=view&id=1bfe9gCEnVKeiT_jkCP8AWKxov8GAROQd" alt="" aria-hidden="true" /><h4>Evidence-Based Design</h4><p>Utilizing <strong>ADDIE & SAM</strong> to bridge performance gaps. I ensure every interactive element and content piece maps directly to a measurable learning objective.</p></div>
+        <div class="highlight-card"><!--
+  ICON 2 — Replace src with your Google Drive PNG link
+-->
+<img class="highlight-card-icon" src="https://drive.google.com/uc?export=view&id=1bfe9gCEnVKeiT_jkCP8AWKxov8GAROQd" alt="" aria-hidden="true" /><h4>Technical &amp; Authoring Fluency</h4><p>My engineering background enables me to master <strong>eAuthoring tools</strong> rapidly and collaborate seamlessly with LMS admins and technical SMEs.</p></div>
+        <div class="highlight-card"><!--
+  ICON 3 — Replace src with your Google Drive PNG link
+-->
+<img class="highlight-card-icon" src="https://drive.google.com/uc?export=view&id=1bfe9gCEnVKeiT_jkCP8AWKxov8GAROQd" alt="" aria-hidden="true" /><h4>Impact &amp; Iteration</h4><p>From <strong>NPS to behavioral metrics</strong>, I analyze learner data to evaluate effectiveness and continuously iterate for better learning ROI.</p></div>
+        <div class="highlight-card"><!--
+  ICON 4 — Replace src with your Google Drive PNG link
+-->
+<img class="highlight-card-icon" src="https://drive.google.com/uc?export=view&id=1bfe9gCEnVKeiT_jkCP8AWKxov8GAROQd" alt="" aria-hidden="true" /><h4>Modern Learning Standards</h4><p>Committed to <strong>WCAG Accessibility</strong> and evidence-based design. I build high-quality, inclusive learning experiences that meet the rigorous professional standards of the UK's <strong>academic and corporate</strong> sectors.</p></div>
       </div>
     </div>
   </div>
@@ -846,49 +824,49 @@
     <div class="skills-panels">
 
       <div class="skills-panel active" id="panel-id">
-        <div class="skill-chip"><div class="skill-chip-name">ADDIE Model</div><div class="skill-chip-level"><div class="skill-chip-fill" style="width:95%"></div></div><div class="skill-chip-meta">Expert · 9 yrs</div></div>
-        <div class="skill-chip"><div class="skill-chip-name">SAM Model</div><div class="skill-chip-level"><div class="skill-chip-fill" style="width:90%"></div></div><div class="skill-chip-meta">Expert · 7 yrs</div></div>
-        <div class="skill-chip"><div class="skill-chip-name">Backward Design</div><div class="skill-chip-level"><div class="skill-chip-fill" style="width:95%"></div></div><div class="skill-chip-meta">Expert · 9 yrs</div></div>
+        <div class="skill-chip"><div class="skill-chip-name">ADDIE Model</div></div>
+        <div class="skill-chip"><div class="skill-chip-name">SAM Model</div></div>
+        <div class="skill-chip"><div class="skill-chip-name">Backward Design</div></div>
       </div>
 
       <div class="skills-panel" id="panel-TLC">
-        <div class="skill-chip"><div class="skill-chip-name">Needs Analysis (TNA)</div><div class="skill-chip-level"><div class="skill-chip-fill" style="width:88%"></div></div><div class="skill-chip-meta">Advanced</div></div>
-        <div class="skill-chip"><div class="skill-chip-name">Storyboarding</div><div class="skill-chip-level"><div class="skill-chip-fill" style="width:82%"></div></div><div class="skill-chip-meta">Proficient</div></div>
-        <div class="skill-chip"><div class="skill-chip-name">Rollout &<br>Implementation Strategy</div><div class="skill-chip-level"><div class="skill-chip-fill" style="width:92%"></div></div><div class="skill-chip-meta">Expert</div></div>
-        <div class="skill-chip"><div class="skill-chip-name">Evaluation<br>(Kirkpatrick Model)</div><div class="skill-chip-level"><div class="skill-chip-fill" style="width:90%"></div></div><div class="skill-chip-meta">Expert</div></div>
+        <div class="skill-chip"><div class="skill-chip-name">Needs Analysis (TNA)</div></div>
+        <div class="skill-chip"><div class="skill-chip-name">Storyboarding</div></div>
+        <div class="skill-chip"><div class="skill-chip-name">Rollout &<br>Implementation Strategy</div></div>
+        <div class="skill-chip"><div class="skill-chip-name">Evaluation<br>(Kirkpatrick Model)</div></div>
       </div>
 
       <div class="skills-panel" id="panel-Authoring">
-        <div class="skill-chip"><div class="skill-chip-name">Articulate<br>Storyline 360</div><div class="skill-chip-level"><div class="skill-chip-fill" style="width:90%"></div></div><div class="skill-chip-meta">Expert · 7 yrs</div></div>
-        <div class="skill-chip"><div class="skill-chip-name">Genially</div><div class="skill-chip-level"><div class="skill-chip-fill" style="width:80%"></div></div><div class="skill-chip-meta">Proficient</div></div>
-        <div class="skill-chip"><div class="skill-chip-name">Canva</div><div class="skill-chip-level"><div class="skill-chip-fill" style="width:88%"></div></div><div class="skill-chip-meta">Advanced</div></div>
-        <div class="skill-chip"><div class="skill-chip-name">Multimedia Production<br>(Video/Audio)</div><div class="skill-chip-level"><div class="skill-chip-fill" style="width:80%"></div></div><div class="skill-chip-meta">Proficient</div></div>
+        <div class="skill-chip"><div class="skill-chip-name">Articulate<br>Storyline 360</div></div>
+        <div class="skill-chip"><div class="skill-chip-name">Genially</div></div>
+        <div class="skill-chip"><div class="skill-chip-name">Canva</div></div>
+        <div class="skill-chip"><div class="skill-chip-name">Multimedia Production<br>(Video/Audio)</div></div>
       </div>
 
       <div class="skills-panel" id="panel-web">
-        <div class="skill-chip"><div class="skill-chip-name">HTML</div><div class="skill-chip-level"><div class="skill-chip-fill" style="width:85%"></div></div><div class="skill-chip-meta">Advanced · 4 yrs</div></div>
-        <div class="skill-chip"><div class="skill-chip-name">CSS</div><div class="skill-chip-level"><div class="skill-chip-fill" style="width:85%"></div></div><div class="skill-chip-meta">Advanced</div></div>
-        <div class="skill-chip"><div class="skill-chip-name">Vibe Coding<br>(AI-assisted development)</div><div class="skill-chip-level"><div class="skill-chip-fill" style="width:82%"></div></div><div class="skill-chip-meta">Advanced</div></div>
+        <div class="skill-chip"><div class="skill-chip-name">HTML</div></div>
+        <div class="skill-chip"><div class="skill-chip-name">CSS</div></div>
+        <div class="skill-chip"><div class="skill-chip-name">Vibe Coding<br>(AI-assisted development)</div></div>
       </div>
       
       <div class="skills-panel" id="panel-Platforms">
-        <div class="skill-chip"><div class="skill-chip-name">LMS/VLE Administration</div><div class="skill-chip-level"><div class="skill-chip-fill" style="width:90%"></div></div><div class="skill-chip-meta">Expert</div></div>
-        <div class="skill-chip"><div class="skill-chip-name">Learning Experience Platforms (LXP)</div><div class="skill-chip-level"><div class="skill-chip-fill" style="width:90%"></div></div><div class="skill-chip-meta">Expert</div></div>
-        <div class="skill-chip"><div class="skill-chip-name">Moodle</div><div class="skill-chip-level"><div class="skill-chip-fill" style="width:88%"></div></div><div class="skill-chip-meta">Advanced</div></div>
-        <div class="skill-chip"><div class="skill-chip-name">Canvas</div><div class="skill-chip-level"><div class="skill-chip-fill" style="width:85%"></div></div><div class="skill-chip-meta">Advanced</div></div>
-        <div class="skill-chip"><div class="skill-chip-name">MS Teams</div><div class="skill-chip-level"><div class="skill-chip-fill" style="width:85%"></div></div><div class="skill-chip-meta">Advanced</div></div>
-        <div class="skill-chip"><div class="skill-chip-name">G-Suite</div><div class="skill-chip-level"><div class="skill-chip-fill" style="width:85%"></div></div><div class="skill-chip-meta">Advanced</div></div>
-        <div class="skill-chip"><div class="skill-chip-name">Zoom</div><div class="skill-chip-level"><div class="skill-chip-fill" style="width:85%"></div></div><div class="skill-chip-meta">Advanced</div></div>
-        <div class="skill-chip"><div class="skill-chip-name">SCORM/xAPI Standards</div><div class="skill-chip-level"><div class="skill-chip-fill" style="width:85%"></div></div><div class="skill-chip-meta">Advanced</div></div>
+        <div class="skill-chip"><div class="skill-chip-name">LMS/VLE Administration</div></div>
+        <div class="skill-chip"><div class="skill-chip-name">Learning Experience Platforms (LXP)</div></div>
+        <div class="skill-chip"><div class="skill-chip-name">Moodle</div></div>
+        <div class="skill-chip"><div class="skill-chip-name">Canvas</div></div>
+        <div class="skill-chip"><div class="skill-chip-name">MS Teams</div></div>
+        <div class="skill-chip"><div class="skill-chip-name">G-Suite</div></div>
+        <div class="skill-chip"><div class="skill-chip-name">Zoom</div></div>
+        <div class="skill-chip"><div class="skill-chip-name">SCORM/xAPI Standards</div></div>
       </div>
 
       <div class="skills-panel" id="panel-soft-skills">
-        <div class="skill-chip"><div class="skill-chip-name">SME Partnership</div><div class="skill-chip-level"><div class="skill-chip-fill" style="width:90%"></div></div><div class="skill-chip-meta">Expert</div></div>
-        <div class="skill-chip"><div class="skill-chip-name">Stakeholder Management</div><div class="skill-chip-level"><div class="skill-chip-fill" style="width:88%"></div></div><div class="skill-chip-meta">Advanced</div></div>
-        <div class="skill-chip"><div class="skill-chip-name">Project Management</div><div class="skill-chip-level"><div class="skill-chip-fill" style="width:88%"></div></div><div class="skill-chip-meta">Advanced</div></div>
-        <div class="skill-chip"><div class="skill-chip-name">Teamwork</div><div class="skill-chip-level"><div class="skill-chip-fill" style="width:82%"></div></div><div class="skill-chip-meta">Advanced</div></div>
-        <div class="skill-chip"><div class="skill-chip-name">Problem Solving</div><div class="skill-chip-level"><div class="skill-chip-fill" style="width:85%"></div></div><div class="skill-chip-meta">Certified · 2023</div></div>
-        <div class="skill-chip"><div class="skill-chip-name">Agile Mindset</div><div class="skill-chip-level"><div class="skill-chip-fill" style="width:90%"></div></div><div class="skill-chip-meta">Expert</div></div>
+        <div class="skill-chip"><div class="skill-chip-name">SME Partnership</div></div>
+        <div class="skill-chip"><div class="skill-chip-name">Stakeholder Management</div></div>
+        <div class="skill-chip"><div class="skill-chip-name">Project Management</div></div>
+        <div class="skill-chip"><div class="skill-chip-name">Teamwork</div></div>
+        <div class="skill-chip"><div class="skill-chip-name">Problem Solving</div></div>
+        <div class="skill-chip"><div class="skill-chip-name">Agile Mindset</div></div>
       </div>
 
     </div>
@@ -1074,7 +1052,7 @@
         <div class="testimonial-author">
           <img
             class="testimonial-avatar"
-            src="images/Mehran Aliabadi.jpeg"
+            src="https://drive.google.com/uc?export=view&id=1bfe9gCEnVKeiT_jkCP8AWKxov8GAROQd"
             alt="Testimonial author"
             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
           />
@@ -1091,7 +1069,7 @@
         <div class="testimonial-author">
           <img
             class="testimonial-avatar"
-            src="images/Farzaneh Mahmoodi.jpeg"
+            src="https://drive.google.com/uc?export=view&id=1bfe9gCEnVKeiT_jkCP8AWKxov8GAROQd"
             alt="Testimonial author"
             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
           />
@@ -1108,7 +1086,7 @@
         <div class="testimonial-author">
           <img
             class="testimonial-avatar"
-            src="images/Mohammad Shahrmiany.jpeg"
+            src="https://drive.google.com/uc?export=view&id=1bfe9gCEnVKeiT_jkCP8AWKxov8GAROQd"
             alt="Testimonial author"
             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
           />
@@ -1128,47 +1106,6 @@
 </section>
 
 <!-- ══════════════════════════════════════
-     BLOG / WRITING
-══════════════════════════════════════ -->
-<section id="blog">
-  <div class="container">
-    <div class="blog-header">
-      <div>
-        <span class="eyebrow">Thinking Out Loud</span>
-        <h2>Writing &amp; <em>Reflections</em></h2>
-      </div>
-      <a href="#" class="btn-ghost" style="font-size:0.72rem;padding:0.5rem 1rem;">All Articles →</a>
-    </div>
-    <div class="blog-grid">
-
-      <!-- SAMPLE BLOG ENTRY — edit title, excerpt, date, tag. Link to blog-template.html -->
-      <article class="blog-card">
-        <div class="blog-card-thumb">
-          <img
-            src="https://drive.google.com/uc?export=view&id=1bfe9gCEnVKeiT_jkCP8AWKxov8GAROQd"
-            alt="Blog post thumbnail"
-            loading="lazy"
-          />
-        </div>
-        <div class="blog-card-top">
-          <span class="blog-date">March 2026</span>
-          <h3 class="blog-card-title">What Relocating Taught Me About Instructional Design</h3>
-          <p class="blog-card-excerpt">Moving from a Head of L&D role in Tehran to building a portfolio from scratch in London has been one of the most clarifying professional experiences of my life. Here's what I've learned about designing for new contexts.</p>
-        </div>
-        <div class="blog-card-foot">
-          <span class="blog-tag">Reflection</span>
-          <a href="blog-template.html" class="blog-read-more">Read →</a>
-        </div>
-      </article>
-
-      <!-- Add more blog-card blocks here as you write articles -->
-      <!-- Template: copy the article block above, update title/date/excerpt/tag, change href to the article file -->
-
-    </div>
-  </div>
-</section>
-
-<!-- ══════════════════════════════════════
      CONTACT
 ══════════════════════════════════════ -->
 <section id="contact">
@@ -1179,11 +1116,11 @@
       <p>I'm open to freelance projects, contract engagements, and full-time opportunities in instructional design and eLearning development — particularly in London and across the UK.</p>
 
       <div class="contact-items">
-        <a href="mailto:hamed.dolatkhahi@gmail.com" class="contact-item">
+        <a href="/cdn-cgi/l/email-protection#422a232f27266c262d2e2336292a232a2b02252f232b2e6c212d2f" class="contact-item">
           <div class="contact-item-icon">✉</div>
           <div class="contact-item-text">
             <span class="contact-item-label">Email</span>
-            <span class="contact-item-value">hamed.dolatkhahi@gmail.com</span>
+            <span class="contact-item-value"><span class="__cf_email__" data-cfemail="fd959c909899d39992919c8996959c9594bd9a909c9491d39e9290">[email&#160;protected]</span></span>
           </div>
         </a>
         <a href="https://linkedin.com/in/hamed-dolatkhahi" target="_blank" rel="noopener" class="contact-item">
@@ -1213,7 +1150,7 @@
       <h3>Ready to connect?</h3>
       <p>Whether you have a project in mind, want to discuss instructional design, or are considering me for a role — I'd love to hear from you. The quickest routes are below.</p>
       <div class="contact-cta-actions">
-        <a href="mailto:hamed.dolatkhahi@gmail.com" class="btn-primary" style="justify-content:center;">
+        <a href="/cdn-cgi/l/email-protection#93fbf2fef6f7bdf7fcfff2e7f8fbf2fbfad3f4fef2faffbdf0fcfe" class="btn-primary" style="justify-content:center;">
           ✉ Send me an email
         </a>
         <a href="https://linkedin.com/in/hamed-dolatkhahi" target="_blank" rel="noopener" class="btn-ghost" style="justify-content:center;">
@@ -1230,6 +1167,37 @@
 </section>
 
 <!-- ══════════════════════════════════════
+     DOWNLOADABLE FILES
+     Add/remove .download-file links as needed.
+     Update href to your Google Drive download link:
+     https://drive.google.com/uc?export=download&id=YOUR_FILE_ID
+══════════════════════════════════════ -->
+<section id="downloads">
+  <div class="downloads-inner">
+    <span class="downloads-label">Downloads</span>
+    <div class="downloads-files">
+      <!--
+        RESUME PDF — replace the href with your Google Drive PDF link.
+        Use export=download to force a direct download:
+        href="https://drive.google.com/uc?export=download&id=YOUR_RESUME_FILE_ID"
+        For now it points to the photo as a placeholder.
+      -->
+      <a href="https://drive.google.com/uc?export=view&id=1bfe9gCEnVKeiT_jkCP8AWKxov8GAROQd"
+         target="_blank" rel="noopener" class="download-file">
+        <span class="download-file-icon">&#x2913;</span> Resume / CV (PDF)
+      </a>
+      <!--
+        Add more downloadable files here as needed. Example:
+        <a href="https://drive.google.com/uc?export=download&id=YOUR_ID"
+           target="_blank" rel="noopener" class="download-file">
+          &#x2913; Portfolio Deck (PDF)
+        </a>
+      -->
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
      FOOTER
 ══════════════════════════════════════ -->
 <footer>
@@ -1239,7 +1207,6 @@
     <ul class="footer-links">
       <li><a href="#about">About</a></li>
       <li><a href="#projects">Projects</a></li>
-      <li><a href="#blog">Writing</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
   </div>
@@ -1259,7 +1226,7 @@
 <!-- ══════════════════════════════════════
      JAVASCRIPT
 ══════════════════════════════════════ -->
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
   /* ── Nav scroll ── */
   window.addEventListener('scroll', () => {
     document.getElementById('site-nav').classList.toggle('scrolled', window.scrollY > 40);
@@ -1282,22 +1249,7 @@
   document.getElementById('hamburger').addEventListener('click', () => document.getElementById('mobile-nav').classList.add('open'));
   document.getElementById('mobile-close').addEventListener('click', () => document.getElementById('mobile-nav').classList.remove('open'));
   function closeMobile() { document.getElementById('mobile-nav').classList.remove('open'); }
-
-  /* ── Font toggle ── */
-  const html = document.documentElement;
-  const toggleBtn = document.getElementById('font-toggle');
-  let currentFont = localStorage.getItem('hd-font') || 'A';
-  applyFont(currentFont);
-
-  function applyFont(f) {
-    html.setAttribute('data-font', f);
-    toggleBtn.textContent = f === 'A' ? 'Font: A (Serif)' : 'Font: B (Syne)';
-    localStorage.setItem('hd-font', f);
-    currentFont = f;
-  }
-  toggleBtn.addEventListener('click', () => applyFont(currentFont === 'A' ? 'B' : 'A'));
-
-  /* ── Skills tabs ── */
+/* ── Skills tabs ── */
   document.querySelectorAll('.skill-tab').forEach(tab => {
     tab.addEventListener('click', () => {
       document.querySelectorAll('.skill-tab').forEach(t => t.classList.remove('active'));
@@ -1344,8 +1296,7 @@
       audience: 'Career changers, junior professionals, and individuals seeking intensive upskilling in technology — ranging in age from 20–40, predominantly self-motivated adult learners.',
       process: 'Applied ADDIE across all programmes: conducted TNA with employer and learner stakeholders, designed modular curricula with integrated assessments, worked with SMEs to develop content, built LMS journeys, and ran iterative post-programme evaluation cycles.',
       tools: 'Instructional Design: ADDIE/SAM · LMS Platform · Google Workspace · Articulate tools · Data dashboards (NPS, completion, progression)',
-      results: [{num:'24+',label:'Annual bootcamps'},{num:'1000s',label:'Learners reached'},{num:'9 yrs',label:'Programme history'}],
-      screenshot: 'Add screenshots, slide decks, or a PDF walkthrough here'
+      link: 'project-template.html'  /* ← update to actual case study URL */
     },
     3: {
       category: 'EdTech Service Design', org: 'Rahnema College · 2021 – 2025', title: 'Linka Career Platform',
@@ -1353,8 +1304,7 @@
       audience: 'Recent tech bootcamp graduates and career changers seeking their first or next tech role, needing guided support navigating the job market and presenting their skills.',
       process: 'Applied Service Design: mapped user journeys end-to-end, ran user research, defined personas, created service blueprints, and iterated features in collaboration with a product and dev team.',
       tools: 'Service Design: journey mapping, persona research, service blueprinting · Agile / backlog management · CRM / HRIS',
-      results: [{num:'2000+',label:'Community members'},{num:'3',label:'Core features built'},{num:'4 yrs',label:'Platform lifetime'}],
-      screenshot: 'Platform screenshots / walkthrough video — add media here'
+      link: 'project-template.html'  /* ← update to actual case study URL */
     }
   };
 
@@ -1363,11 +1313,10 @@
     document.getElementById('modal-header').innerHTML = `<span style="font-family:var(--font-mono);font-size:0.63rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--accent)">${p.category} · ${p.org}</span><h2 style="font-family:var(--font-display);font-size:1.9rem;font-weight:var(--display-weight);line-height:1.15;margin-top:0.4rem">${p.title}</h2>`;
     document.getElementById('modal-body').innerHTML = `
       <div class="modal-section"><span class="modal-section-label">Goal</span><div class="modal-section-content">${p.goal}</div></div>
-      <div class="modal-section"><span class="modal-section-label">Audience Persona</span><div class="modal-section-content">${p.audience}</div></div>
+      <div class="modal-section"><span class="modal-section-label">Audience</span><div class="modal-section-content">${p.audience}</div></div>
       <div class="modal-section"><span class="modal-section-label">Design Process</span><div class="modal-section-content">${p.process}</div></div>
       <div class="modal-section"><span class="modal-section-label">Tools & Methods</span><div class="modal-section-content">${p.tools}</div></div>
-      <div class="modal-section"><span class="modal-section-label">Results</span><div class="modal-results">${p.results.map(r=>`<div class="modal-result-item"><span class="modal-result-num">${r.num}</span><span class="modal-result-label">${r.label}</span></div>`).join('')}</div></div>
-      <div class="modal-section"><span class="modal-section-label">Screenshots / Walkthrough</span><div class="modal-screenshot-area">[ ${p.screenshot} ]</div></div>
+      ${p.link ? `<div class="modal-section" style="padding-top:0.5rem;border-top:1px solid var(--paper-dark)"><a href="${p.link}" target="_blank" rel="noopener" style="font-size:0.75rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--accent);display:inline-flex;align-items:center;gap:0.4rem;">View Full Case Study →</a></div>` : ''}
     `;
     document.getElementById('modal-overlay').classList.add('open');
     document.body.style.overflow = 'hidden';
