@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
+<link rel="icon" type="image/jpeg" href="images/photo_2026-02-13 13.26.29.jpeg" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Hamed Dolatkhahi — Instructional Designer & L&D Specialist</title>
 
@@ -41,7 +42,7 @@
     --heading-size-hero: clamp(3rem, 6vw, 5.5rem);
     --heading-size-section: clamp(2rem, 3.5vw, 3rem);
     /* ↓ ADJUST THIS one value to resize the About sidebar h2 independently */
-    --about-heading-size: clamp(1.6rem, 2.8vw, 2.4rem);
+    --about-heading-size: clamp(1.15rem, 2vw, 1.65rem);
     --heading-lh: 1.0;
   }
 
@@ -158,7 +159,7 @@
   }
   .hero-content {
     position: relative; z-index: 1;
-    padding: 4rem 3rem 4rem 2rem;
+    padding: 4rem 3rem 4rem 4rem;
     animation: fadeUp 0.9s ease both;
   }
   .hero-label {
@@ -260,7 +261,7 @@
   }
   .highlight-card:hover { border-color: var(--accent); transform: translateY(-2px); }
 
-  .highlight-card h4 { font-size: 0.82rem; font-weight: 500; letter-spacing: 0.04em; margin-bottom: 0.3rem; }
+  .highlight-card h4 { font-size: 0.82rem; font-weight: 500; letter-spacing: 0.04em; margin-bottom: 0.3rem; color: var(--accent); }
   .highlight-card p { font-size: 0.82rem; color: var(--ink-soft); line-height: 1.6; margin: 0; }
 
   /* ══════════════════════════════════════════════
@@ -283,11 +284,12 @@
   }
   .skill-tab:hover, .skill-tab.active { background: var(--accent); border-color: var(--accent); color: var(--white); }
   .skills-panel { display: none; }
-  .skills-panel.active { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px,1fr)); gap: 1rem; animation: fadeUp 0.35s ease; }
+  .skills-panel.active { display: flex; flex-wrap: wrap; gap: 0.5rem; animation: fadeUp 0.35s ease; align-items: flex-start; }
   .skill-chip {
     background: var(--white); border: 1px solid var(--paper-dark);
-    padding: 0.75rem 1.1rem; border-radius: var(--radius);
-    display: flex; flex-direction: column; gap: 0;
+    padding: 0.55rem 1rem; border-radius: var(--radius);
+    display: inline-flex; flex-direction: row; align-items: center; gap: 0;
+    white-space: nowrap; width: auto;
     transition: border-color var(--transition), transform var(--transition), box-shadow var(--transition);
   }
   .skill-chip:hover { border-color: var(--accent); transform: translateY(-2px); box-shadow: 0 4px 16px rgba(200,96,42,0.1); }
@@ -435,7 +437,7 @@
   .testimonial-name { font-size: 0.85rem; font-weight: 500; color: var(--paper); }
   .testimonial-role { font-size: 0.7rem; color: rgba(255,255,255,0.4); font-family: var(--font-mono); }
   .testimonial-note {
-    text-align: center; font-size: 0.78rem; color: rgba(255,255,255,0.25);
+    text-align: center; font-size: 0.78rem; color: rgba(255,255,255,0.75);
     font-family: var(--font-mono); letter-spacing: 0.06em; margin-top: 1.5rem;
     border-top: 1px solid rgba(255,255,255,0.06); padding-top: 1.5rem;
   }
@@ -480,7 +482,7 @@
      CONTACT
   ══════════════════════════════════════════════ */
   #contact { background: var(--paper); padding: var(--section-pad); }
-  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
+  .contact-grid { display: grid; grid-template-columns: 1fr; gap: 2.5rem; align-items: start; max-width: 560px; }
   .contact-left h2 {
     font-family: var(--font-display);
     font-size: var(--heading-size-section);
@@ -498,10 +500,15 @@
   }
   .contact-item:hover { border-color: var(--accent); transform: translateX(4px); }
   .contact-item-icon {
-    width: 36px; height: 36px; background: var(--accent-light); border-radius: var(--radius);
+    width: 38px; height: 38px; background: var(--accent-light); border-radius: var(--radius);
     display: flex; align-items: center; justify-content: center;
-    color: var(--accent); font-size: 1rem; flex-shrink: 0;
-    font-family: var(--font-mono); font-size: 0.75rem; font-weight: 400;
+    color: var(--accent); flex-shrink: 0; overflow: hidden; padding: 7px;
+  }
+  .contact-item-icon img {
+    width: 100%; height: 100%; object-fit: contain;
+    /* multiply blend so white PNG backgrounds vanish on the light card */
+    mix-blend-mode: multiply;
+    opacity: 0.75;
   }
   .contact-item-label { font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--ink-faint); font-family: var(--font-mono); display: block; }
   .contact-item-value { font-size: 0.9rem; font-weight: 500; color: var(--ink); }
@@ -532,22 +539,6 @@
   }
   .social-link:hover { background: var(--ink); border-color: var(--ink); color: var(--white); }
 
-  .contact-right {}
-  .contact-right h3 {
-    font-family: var(--font-display); font-size: 1.5rem;
-    font-weight: var(--display-weight); margin-bottom: 1rem;
-  }
-  .contact-right p { font-size: 0.9rem; color: var(--ink-soft); line-height: 1.75; margin-bottom: 1.5rem; }
-  .contact-cta-block {
-    background: var(--white); border: 1px solid var(--paper-dark);
-    border-radius: var(--radius); padding: 2rem;
-  }
-  .contact-cta-block h3 {
-    font-family: var(--font-display); font-size: 1.5rem;
-    font-weight: var(--display-weight); margin-bottom: 0.75rem;
-  }
-  .contact-cta-block p { font-size: 0.88rem; color: var(--ink-soft); line-height: 1.75; margin-bottom: 1.5rem; }
-  .contact-cta-actions { display: flex; flex-direction: column; gap: 0.75rem; }
 
   /* ══════════════════════════════════════════════
      FOOTER
@@ -719,7 +710,7 @@
 ══════════════════════════════════════ -->
 <section id="hero">
   <div class="hero-bg-stripe"></div>
-  <div class="hero-content container" style="padding-left:2rem;padding-right:1rem;max-width:600px;margin:0;">
+  <div class="hero-content container" style="padding-left:4rem;padding-right:1rem;max-width:620px;margin:0;">
     <div class="hero-label">Instructional Designer · eLearning Developer</div>
     <h1 class="hero-name">Hamed<br><em>Dolatkhahi</em></h1>
     <p class="hero-title">Designing Learning Experiences that Drive Performance</p>
@@ -765,7 +756,11 @@
         loading="lazy"
         onerror="this.style.display='none';"
       />
-      <h2>Instructional Designer<br><em>eLearning Developer</em><br>L&D Specialist<br></h2>
+      <h2 style="white-space:nowrap; line-height:1.55;">
+        <span style="display:block;">Instructional Designer</span>
+        <span style="display:block;"><em>eLearning Developer</em></span>
+        <span style="display:block;">L&amp;D Specialist</span>
+      </h2>
       <div class="about-location">
         <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
         London, UK
@@ -832,21 +827,21 @@
       <div class="skills-panel" id="panel-TLC">
         <div class="skill-chip"><div class="skill-chip-name">Needs Analysis (TNA)</div></div>
         <div class="skill-chip"><div class="skill-chip-name">Storyboarding</div></div>
-        <div class="skill-chip"><div class="skill-chip-name">Rollout &<br>Implementation Strategy</div></div>
-        <div class="skill-chip"><div class="skill-chip-name">Evaluation<br>(Kirkpatrick Model)</div></div>
+        <div class="skill-chip"><div class="skill-chip-name">Rollout &amp; Implementation Strategy</div></div>
+        <div class="skill-chip"><div class="skill-chip-name">Evaluation (Kirkpatrick Model)</div></div>
       </div>
 
       <div class="skills-panel" id="panel-Authoring">
-        <div class="skill-chip"><div class="skill-chip-name">Articulate<br>Storyline 360</div></div>
+        <div class="skill-chip"><div class="skill-chip-name">Articulate Storyline 360</div></div>
         <div class="skill-chip"><div class="skill-chip-name">Genially</div></div>
         <div class="skill-chip"><div class="skill-chip-name">Canva</div></div>
-        <div class="skill-chip"><div class="skill-chip-name">Multimedia Production<br>(Video/Audio)</div></div>
+        <div class="skill-chip"><div class="skill-chip-name">Multimedia Production (Video/Audio)</div></div>
       </div>
 
       <div class="skills-panel" id="panel-web">
         <div class="skill-chip"><div class="skill-chip-name">HTML</div></div>
         <div class="skill-chip"><div class="skill-chip-name">CSS</div></div>
-        <div class="skill-chip"><div class="skill-chip-name">Vibe Coding<br>(AI-assisted development)</div></div>
+        <div class="skill-chip"><div class="skill-chip-name">Vibe Coding (AI-assisted development)</div></div>
       </div>
       
       <div class="skills-panel" id="panel-Platforms">
@@ -1117,14 +1112,14 @@
 
       <div class="contact-items">
         <a href="/cdn-cgi/l/email-protection#422a232f27266c262d2e2336292a232a2b02252f232b2e6c212d2f" class="contact-item">
-          <div class="contact-item-icon">✉</div>
+          <div class="contact-item-icon"><img src="images/data-analysis.png" alt="" aria-hidden="true" /></div>
           <div class="contact-item-text">
             <span class="contact-item-label">Email</span>
             <span class="contact-item-value"><span class="__cf_email__" data-cfemail="fd959c909899d39992919c8996959c9594bd9a909c9491d39e9290">[email&#160;protected]</span></span>
           </div>
         </a>
         <a href="https://linkedin.com/in/hamed-dolatkhahi" target="_blank" rel="noopener" class="contact-item">
-          <div class="contact-item-icon">in</div>
+          <div class="contact-item-icon"><img src="images/data-analysis.png" alt="" aria-hidden="true" /></div>
           <div class="contact-item-text">
             <span class="contact-item-label">LinkedIn</span>
             <span class="contact-item-value">linkedin.com/in/hamed-dolatkhahi</span>
@@ -1144,24 +1139,6 @@
         <a href="https://linkedin.com/in/hamed-dolatkhahi" target="_blank" rel="noopener" class="social-link">LinkedIn</a>
         <!-- Add more: <a href="#" class="social-link">Twitter / X</a> -->
       </div>
-    </div>
-
-    <div class="contact-cta-block">
-      <h3>Ready to connect?</h3>
-      <p>Whether you have a project in mind, want to discuss instructional design, or are considering me for a role — I'd love to hear from you. The quickest routes are below.</p>
-      <div class="contact-cta-actions">
-        <a href="/cdn-cgi/l/email-protection#93fbf2fef6f7bdf7fcfff2e7f8fbf2fbfad3f4fef2faffbdf0fcfe" class="btn-primary" style="justify-content:center;">
-          ✉ Send me an email
-        </a>
-        <a href="https://linkedin.com/in/hamed-dolatkhahi" target="_blank" rel="noopener" class="btn-ghost" style="justify-content:center;">
-          Connect on LinkedIn →
-        </a>
-      </div>
-<!--
-            <p style="margin-top:1.5rem;font-size:0.8rem;color:var(--ink-faint);font-family:var(--font-mono);letter-spacing:0.04em;">
-        No contact form — just direct, personal communication.
-      </p>>
--->
     </div>
   </div>
 </section>
