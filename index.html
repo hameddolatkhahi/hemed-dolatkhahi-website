@@ -309,13 +309,27 @@
     background: var(--paper-dark);
   }
 
-  .highlight-card {
+.highlight-card {
     background: var(--paper); border: 1px solid var(--paper-dark);
     padding: 1.25rem 1.5rem; border-radius: var(--radius);
     transition: border-color var(--transition), transform var(--transition);
   }
   .highlight-card:hover { border-color: var(--accent); transform: translateY(-2px); }
-  .highlight-card-icon { font-size: 1.3rem; margin-bottom: 0.5rem; display: block; }
+  
+  /* Adjusted this block to handle the new image icon */
+  .highlight-card-icon { 
+    font-size: 1.3rem; 
+    margin-bottom: 0.5rem; 
+    display: block; 
+  }
+  
+  /* ADD THIS: Forces the image to be the same size as the original emoji */
+  .highlight-card-icon img {
+    height: 1.3rem; /* Matches the font-size of the original icon span */
+    width: auto;
+    display: block;
+  }
+
   .highlight-card h4 { font-size: 0.82rem; font-weight: 500; letter-spacing: 0.04em; margin-bottom: 0.3rem; }
   .highlight-card p { font-size: 0.82rem; color: var(--ink-soft); line-height: 1.6; margin: 0; }
 
