@@ -2,7 +2,6 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<link rel="icon" type="image/jpeg" href="images/photo_2026-02-13 13.26.29.jpeg" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Hamed Dolatkhahi — Instructional Designer & L&D Specialist</title>
 
@@ -42,7 +41,7 @@
     --heading-size-hero: clamp(3rem, 6vw, 5.5rem);
     --heading-size-section: clamp(2rem, 3.5vw, 3rem);
     /* ↓ ADJUST THIS one value to resize the About sidebar h2 independently */
-    --about-heading-size: clamp(1.15rem, 2vw, 1.65rem);
+    --about-heading-size: clamp(1.6rem, 2.8vw, 2.4rem);
     --heading-lh: 1.0;
   }
 
@@ -159,7 +158,7 @@
   }
   .hero-content {
     position: relative; z-index: 1;
-    padding: 4rem 3rem 4rem 4rem;
+    padding: 4rem 3rem 4rem 6rem;
     animation: fadeUp 0.9s ease both;
   }
   .hero-label {
@@ -261,7 +260,7 @@
   }
   .highlight-card:hover { border-color: var(--accent); transform: translateY(-2px); }
 
-  .highlight-card h4 { font-size: 0.82rem; font-weight: 500; letter-spacing: 0.04em; margin-bottom: 0.3rem; color: var(--accent); }
+  .highlight-card h4 { font-size: 0.82rem; font-weight: 500; letter-spacing: 0.04em; margin-bottom: 0.3rem; }
   .highlight-card p { font-size: 0.82rem; color: var(--ink-soft); line-height: 1.6; margin: 0; }
 
   /* ══════════════════════════════════════════════
@@ -284,12 +283,11 @@
   }
   .skill-tab:hover, .skill-tab.active { background: var(--accent); border-color: var(--accent); color: var(--white); }
   .skills-panel { display: none; }
-  .skills-panel.active { display: flex; flex-wrap: wrap; gap: 0.5rem; animation: fadeUp 0.35s ease; align-items: flex-start; }
+  .skills-panel.active { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px,1fr)); gap: 1rem; animation: fadeUp 0.35s ease; }
   .skill-chip {
     background: var(--white); border: 1px solid var(--paper-dark);
-    padding: 0.55rem 1rem; border-radius: var(--radius);
-    display: inline-flex; flex-direction: row; align-items: center; gap: 0;
-    white-space: nowrap; width: auto;
+    padding: 0.75rem 1.1rem; border-radius: var(--radius);
+    display: flex; flex-direction: column; gap: 0;
     transition: border-color var(--transition), transform var(--transition), box-shadow var(--transition);
   }
   .skill-chip:hover { border-color: var(--accent); transform: translateY(-2px); box-shadow: 0 4px 16px rgba(200,96,42,0.1); }
@@ -414,16 +412,18 @@
     font-weight: var(--display-weight); color: var(--paper);
   }
   .testimonials-header h2 em { font-style: var(--display-style); color: var(--gold); }
-  .testimonials-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px,1fr)); gap: 1.5rem; }
+  .testimonials-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px,1fr)); gap: 1.5rem; align-items: stretch; }
   .testimonial-card {
     background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08);
     border-radius: var(--radius); padding: 2rem;
     transition: border-color var(--transition);
+    display: flex; flex-direction: column;
   }
   .testimonial-card:hover { border-color: rgba(184,146,74,0.4); }
   .testimonial-quote {
     font-family: var(--font-display); font-size: 1.08rem; font-weight: 300;
     line-height: 1.7; color: rgba(255,255,255,0.8); margin-bottom: 1.5rem; font-style: italic;
+    flex: 1;
   }
   .testimonial-quote::before { content: '\201C'; color: var(--gold); font-size: 1.5rem; line-height: 0; vertical-align: -0.4rem; margin-right: 0.2rem; }
   .testimonial-author { display: flex; align-items: center; gap: 0.75rem; }
@@ -437,7 +437,7 @@
   .testimonial-name { font-size: 0.85rem; font-weight: 500; color: var(--paper); }
   .testimonial-role { font-size: 0.7rem; color: rgba(255,255,255,0.4); font-family: var(--font-mono); }
   .testimonial-note {
-    text-align: center; font-size: 0.78rem; color: rgba(255,255,255,0.75);
+    text-align: center; font-size: 0.78rem; color: rgba(255,255,255,0.25);
     font-family: var(--font-mono); letter-spacing: 0.06em; margin-top: 1.5rem;
     border-top: 1px solid rgba(255,255,255,0.06); padding-top: 1.5rem;
   }
@@ -482,7 +482,7 @@
      CONTACT
   ══════════════════════════════════════════════ */
   #contact { background: var(--paper); padding: var(--section-pad); }
-  .contact-grid { display: grid; grid-template-columns: 1fr; gap: 2.5rem; align-items: start; max-width: 560px; }
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
   .contact-left h2 {
     font-family: var(--font-display);
     font-size: var(--heading-size-section);
@@ -500,28 +500,13 @@
   }
   .contact-item:hover { border-color: var(--accent); transform: translateX(4px); }
   .contact-item-icon {
-    width: 38px; height: 38px; background: var(--accent-light); border-radius: var(--radius);
+    width: 36px; height: 36px; background: var(--accent-light); border-radius: var(--radius);
     display: flex; align-items: center; justify-content: center;
-    color: var(--accent); flex-shrink: 0; overflow: hidden; padding: 7px;
-  }
-  .contact-item-icon img {
-    width: 100%; height: 100%; object-fit: contain;
-    /* multiply blend so white PNG backgrounds vanish on the light card */
-    mix-blend-mode: multiply;
-    opacity: 0.75;
+    color: var(--accent); font-size: 1rem; flex-shrink: 0;
+    font-family: var(--font-mono); font-size: 0.75rem; font-weight: 400;
   }
   .contact-item-label { font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--ink-faint); font-family: var(--font-mono); display: block; }
   .contact-item-value { font-size: 0.9rem; font-weight: 500; color: var(--ink); }
-
-  .copy-email-btn {
-    display: inline-flex; align-items: center; gap: 0.5rem;
-    font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase;
-    color: var(--accent); border: 1px solid var(--accent-light);
-    background: var(--accent-light); padding: 0.4rem 0.9rem; border-radius: 100px;
-    cursor: pointer; transition: all var(--transition); margin-top: 0.5rem;
-  }
-  .copy-email-btn:hover { background: var(--accent); color: var(--white); border-color: var(--accent); }
-  .copy-email-btn.copied { background: var(--ink); color: var(--white); border-color: var(--ink); }
 
   .contact-note {
     font-size: 0.8rem; color: var(--ink-faint); font-style: italic;
@@ -530,15 +515,23 @@
     border-left: 2px solid var(--accent); border-radius: 0 var(--radius) var(--radius) 0;
   }
 
-  .social-strip { display: flex; gap: 0.75rem; margin-top: 1.5rem; flex-wrap: wrap; }
-  .social-link {
-    display: flex; align-items: center; gap: 0.5rem;
-    font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase;
-    color: var(--ink-soft); border: 1px solid var(--paper-dark);
-    padding: 0.4rem 0.9rem; border-radius: 100px; transition: all var(--transition);
-  }
-  .social-link:hover { background: var(--ink); border-color: var(--ink); color: var(--white); }
 
+  .contact-right {}
+  .contact-right h3 {
+    font-family: var(--font-display); font-size: 1.5rem;
+    font-weight: var(--display-weight); margin-bottom: 1rem;
+  }
+  .contact-right p { font-size: 0.9rem; color: var(--ink-soft); line-height: 1.75; margin-bottom: 1.5rem; }
+  .contact-cta-block {
+    background: var(--white); border: 1px solid var(--paper-dark);
+    border-radius: var(--radius); padding: 2rem;
+  }
+  .contact-cta-block h3 {
+    font-family: var(--font-display); font-size: 1.5rem;
+    font-weight: var(--display-weight); margin-bottom: 0.75rem;
+  }
+  .contact-cta-block p { font-size: 0.88rem; color: var(--ink-soft); line-height: 1.75; margin-bottom: 1.5rem; }
+  .contact-cta-actions { display: flex; flex-direction: column; gap: 0.75rem; }
 
   /* ══════════════════════════════════════════════
      FOOTER
@@ -635,30 +628,6 @@
      DOWNLOADABLE FILES BAR
      Sits just above the footer. Add more .download-file links as needed.
   ══════════════════════════════════════════════ */
-  #downloads {
-    background: var(--ink);
-    padding: 1.1rem 2rem;
-  }
-  .downloads-inner {
-    max-width: var(--max-width); margin: 0 auto;
-    display: flex; align-items: center; gap: 2rem; flex-wrap: wrap;
-    justify-content: space-between;
-  }
-  .downloads-label {
-    font-family: var(--font-mono); font-size: 0.65rem; letter-spacing: 0.16em;
-    text-transform: uppercase; color: rgba(255,255,255,0.35);
-    white-space: nowrap;
-  }
-  .downloads-files { display: flex; gap: 0.75rem; flex-wrap: wrap; }
-  .download-file {
-    display: inline-flex; align-items: center; gap: 0.5rem;
-    font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase;
-    color: rgba(255,255,255,0.7); border: 1px solid rgba(255,255,255,0.12);
-    padding: 0.4rem 1rem; border-radius: var(--radius);
-    transition: border-color var(--transition), color var(--transition), background var(--transition);
-  }
-  .download-file:hover { border-color: var(--accent); color: var(--white); background: rgba(200,96,42,0.18); }
-  .download-file-icon { font-size: 0.85rem; opacity: 0.8; }
 </style>
 </head>
 <body>
@@ -710,7 +679,7 @@
 ══════════════════════════════════════ -->
 <section id="hero">
   <div class="hero-bg-stripe"></div>
-  <div class="hero-content container" style="padding-left:4rem;padding-right:1rem;max-width:620px;margin:0;">
+  <div class="hero-content container" style="padding-left:6rem;padding-right:1rem;max-width:640px;margin:0;">
     <div class="hero-label">Instructional Designer · eLearning Developer</div>
     <h1 class="hero-name">Hamed<br><em>Dolatkhahi</em></h1>
     <p class="hero-title">Designing Learning Experiences that Drive Performance</p>
@@ -756,11 +725,7 @@
         loading="lazy"
         onerror="this.style.display='none';"
       />
-      <h2 style="white-space:nowrap; line-height:1.55;">
-        <span style="display:block;">Instructional Designer</span>
-        <span style="display:block;"><em>eLearning Developer</em></span>
-        <span style="display:block;">L&amp;D Specialist</span>
-      </h2>
+      <h2>Instructional Designer<br><em>eLearning Developer</em><br>L&D Specialist<br></h2>
       <div class="about-location">
         <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
         London, UK
@@ -827,21 +792,21 @@
       <div class="skills-panel" id="panel-TLC">
         <div class="skill-chip"><div class="skill-chip-name">Needs Analysis (TNA)</div></div>
         <div class="skill-chip"><div class="skill-chip-name">Storyboarding</div></div>
-        <div class="skill-chip"><div class="skill-chip-name">Rollout &amp; Implementation Strategy</div></div>
-        <div class="skill-chip"><div class="skill-chip-name">Evaluation (Kirkpatrick Model)</div></div>
+        <div class="skill-chip"><div class="skill-chip-name">Rollout &<br>Implementation Strategy</div></div>
+        <div class="skill-chip"><div class="skill-chip-name">Evaluation<br>(Kirkpatrick Model)</div></div>
       </div>
 
       <div class="skills-panel" id="panel-Authoring">
-        <div class="skill-chip"><div class="skill-chip-name">Articulate Storyline 360</div></div>
+        <div class="skill-chip"><div class="skill-chip-name">Articulate<br>Storyline 360</div></div>
         <div class="skill-chip"><div class="skill-chip-name">Genially</div></div>
         <div class="skill-chip"><div class="skill-chip-name">Canva</div></div>
-        <div class="skill-chip"><div class="skill-chip-name">Multimedia Production (Video/Audio)</div></div>
+        <div class="skill-chip"><div class="skill-chip-name">Multimedia Production<br>(Video/Audio)</div></div>
       </div>
 
       <div class="skills-panel" id="panel-web">
         <div class="skill-chip"><div class="skill-chip-name">HTML</div></div>
         <div class="skill-chip"><div class="skill-chip-name">CSS</div></div>
-        <div class="skill-chip"><div class="skill-chip-name">Vibe Coding (AI-assisted development)</div></div>
+        <div class="skill-chip"><div class="skill-chip-name">Vibe Coding<br>(AI-assisted development)</div></div>
       </div>
       
       <div class="skills-panel" id="panel-Platforms">
@@ -1060,7 +1025,7 @@
       </div>
 
       <div class="testimonial-card">
-        <div class="testimonial-quote">I highly recommend Hamed for any role that needs a skilled project manager, a smart process designer, and—most importantly—an adaptable, hands-on, and inspiring leader. Any team would be lucky to have him!<br></div>
+        <div class="testimonial-quote">I highly recommend Hamed for any role that needs a skilled project manager, a smart process designer, and—most importantly—an adaptable, hands-on, and inspiring leader. Any team would be lucky to have him!</div>
         <div class="testimonial-author">
           <img
             class="testimonial-avatar"
@@ -1077,7 +1042,7 @@
       </div>
 
       <div class="testimonial-card">
-        <div class="testimonial-quote">Having Hamed in your team brings a great sense of confidence. He can be a key member of any team. Hamed is hardworking and has a strong ability to manage both tasks and people. He can lead important projects to success.<br>  </div>
+        <div class="testimonial-quote">Having Hamed in your team brings a great sense of confidence. He can be a key member of any team. Hamed is hardworking and has a strong ability to manage both tasks and people. He can lead important projects to success.</div>
         <div class="testimonial-author">
           <img
             class="testimonial-avatar"
@@ -1107,71 +1072,41 @@
   <div class="container contact-grid">
     <div class="contact-left">
       <span class="eyebrow">Get in Touch</span>
-      <h2>Let's Work<br><em>Together</em></h2>
+      <h2>Let's Work <em>Together</em></h2>
       <p>I'm open to freelance projects, contract engagements, and full-time opportunities in instructional design and eLearning development — particularly in London and across the UK.</p>
 
       <div class="contact-items">
-        <a href="/cdn-cgi/l/email-protection#422a232f27266c262d2e2336292a232a2b02252f232b2e6c212d2f" class="contact-item">
+        <!--
+          EMAIL — clicking anywhere on this row copies the address and briefly shows "Copied!".
+          Update the data-email attribute if your address ever changes.
+        -->
+        <button
+          class="contact-item contact-item-copy"
+          data-email="hamed.dolatkhahi@gmail.com"
+          onclick="copyContactEmail(this)"
+          style="width:100%;text-align:left;cursor:pointer;background:var(--white);border:1px solid var(--paper-dark);"
+          aria-label="Copy email address"
+        >
           <div class="contact-item-icon"><img src="images/data-analysis.png" alt="" aria-hidden="true" /></div>
           <div class="contact-item-text">
             <span class="contact-item-label">Email</span>
-            <span class="contact-item-value"><span class="__cf_email__" data-cfemail="fd959c909899d39992919c8996959c9594bd9a909c9491d39e9290">[email&#160;protected]</span></span>
+            <span class="contact-item-value" id="email-value-display">hamed.dolatkhahi@gmail.com</span>
           </div>
-        </a>
+        </button>
         <a href="https://linkedin.com/in/hamed-dolatkhahi" target="_blank" rel="noopener" class="contact-item">
-          <div class="contact-item-icon"><img src="images/data-analysis.png" alt="" aria-hidden="true" /></div>
+          <div class="contact-item-icon">in</div>
           <div class="contact-item-text">
             <span class="contact-item-label">LinkedIn</span>
             <span class="contact-item-value">linkedin.com/in/hamed-dolatkhahi</span>
           </div>
         </a>
       </div>
-
-      <button class="copy-email-btn" id="copy-email-btn" onclick="copyEmail()">
-        📋 Copy Email Address
-      </button>
 <!--
       <div class="contact-note">
         I prefer being reached via email or LinkedIn — both go directly to me. I aim to reply within 1–2 business days.
       </div>
 -->
-      <div class="social-strip">
-        <a href="https://linkedin.com/in/hamed-dolatkhahi" target="_blank" rel="noopener" class="social-link">LinkedIn</a>
-        <!-- Add more: <a href="#" class="social-link">Twitter / X</a> -->
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ══════════════════════════════════════
-     DOWNLOADABLE FILES
-     Add/remove .download-file links as needed.
-     Update href to your Google Drive download link:
-     https://drive.google.com/uc?export=download&id=YOUR_FILE_ID
-══════════════════════════════════════ -->
-<section id="downloads">
-  <div class="downloads-inner">
-    <span class="downloads-label">Downloads</span>
-    <div class="downloads-files">
-      <!--
-        RESUME PDF — replace the href with your Google Drive PDF link.
-        Use export=download to force a direct download:
-        href="https://drive.google.com/uc?export=download&id=YOUR_RESUME_FILE_ID"
-        For now it points to the photo as a placeholder.
-      -->
-      <a href="https://drive.google.com/uc?export=view&id=1bfe9gCEnVKeiT_jkCP8AWKxov8GAROQd"
-         target="_blank" rel="noopener" class="download-file">
-        <span class="download-file-icon">&#x2913;</span> Resume / CV (PDF)
-      </a>
-      <!--
-        Add more downloadable files here as needed. Example:
-        <a href="https://drive.google.com/uc?export=download&id=YOUR_ID"
-           target="_blank" rel="noopener" class="download-file">
-          &#x2913; Portfolio Deck (PDF)
-        </a>
-      -->
-    </div>
-  </div>
+</div>
 </section>
 
 <!-- ══════════════════════════════════════
@@ -1254,14 +1189,22 @@
       });
     });
   });
+, 2500);
+    });
+  }
 
-  /* ── Copy email ── */
-  function copyEmail() {
-    navigator.clipboard.writeText('hamed.dolatkhahi@gmail.com').then(() => {
-      const btn = document.getElementById('copy-email-btn');
-      btn.textContent = '✓ Copied!';
-      btn.classList.add('copied');
-      setTimeout(() => { btn.textContent = '📋 Copy Email Address'; btn.classList.remove('copied'); }, 2500);
+  /* ── Copy email on contact-item click ── */
+  function copyContactEmail(btn) {
+    const email = btn.getAttribute('data-email');
+    navigator.clipboard.writeText(email).then(() => {
+      const display = document.getElementById('email-value-display');
+      const orig = display.textContent;
+      display.textContent = '✓ Copied!';
+      btn.style.borderColor = 'var(--accent)';
+      setTimeout(() => {
+        display.textContent = orig;
+        btn.style.borderColor = '';
+      }, 2000);
     });
   }
 
