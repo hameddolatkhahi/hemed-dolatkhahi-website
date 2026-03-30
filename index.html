@@ -1,0 +1,1354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Hamed Dolatkhahi — Instructional Designer & L&D Specialist</title>
+
+<!--
+  ══════════════════════════════════════════════════════
+  FONT TOGGLE SYSTEM
+  ══════════════════════════════════════════════════════
+  FONT A (current): Cormorant Garamond + DM Sans — editorial, warm serif feel
+  FONT B (alt):     Syne + DM Sans — bold geometric sans; same feel as godesignsomething.co
+  
+  To switch permanently: change data-font="A" to data-font="B" on <html> tag.
+  The toggle button in the nav lets you preview both live.
+  ══════════════════════════════════════════════════════
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<!-- Font A: Cormorant Garamond (display serif) + DM Sans (body) + DM Mono (code) -->
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet" />
+<!-- Font B: Syne (bold geometric display) — godesignsomething.co aesthetic -->
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+<style>
+  /* ══════════════════════════════════════════════
+     DESIGN TOKENS
+  ══════════════════════════════════════════════ */
+  :root {
+    --ink:         #1a1714;
+    --ink-soft:    #5a554f;
+    --ink-faint:   #9e9890;
+    --paper:       #f5f2ec;
+    --paper-mid:   #ede9e0;
+    --paper-dark:  #ddd8cc;
+    --accent:      #c8602a;
+    --accent-light:#f0ddd4;
+    --gold:        #b8924a;
+    --white:       #fdfaf6;
+
+    --radius: 2px;
+    --transition: 0.25s cubic-bezier(0.4,0,0.2,1);
+    --max-width: 1120px;
+    --section-pad: 5rem 2rem;
+
+    /* Font A defaults */
+    --font-display: 'Cormorant Garamond', Georgia, serif;
+    --font-body:    'DM Sans', sans-serif;
+    --font-mono:    'DM Mono', monospace;
+    --display-style: italic; /* italic looks great on serif displays */
+    --display-weight: 300;
+    --heading-size-hero: clamp(3rem, 6vw, 5.5rem);
+    --heading-size-section: clamp(2rem, 3.5vw, 3rem);
+    --heading-lh: 1.0;
+  }
+
+  /* ── Font B overrides ── */
+  html[data-font="B"] {
+    --font-display: 'Syne', sans-serif;
+    --display-style: normal;
+    --display-weight: 700;
+    --heading-size-hero: clamp(2.4rem, 5vw, 4.5rem);
+    --heading-size-section: clamp(1.6rem, 3vw, 2.5rem);
+    --heading-lh: 1.1;
+    /* Syne looks sharp at tighter tracking */
+  }
+
+  html[data-font="B"] .display-heading,
+  html[data-font="B"] h1, html[data-font="B"] h2,
+  html[data-font="B"] h3, html[data-font="B"] .hero-name,
+  html[data-font="B"] .timeline-role,
+  html[data-font="B"] .project-title,
+  html[data-font="B"] .blog-card-title,
+  html[data-font="B"] .modal h2 {
+    letter-spacing: -0.02em;
+    font-weight: 700;
+  }
+  /* Syne doesn't need italic for flair — use color instead */
+  html[data-font="B"] em { font-style: normal; }
+
+  /* ══════════════════════════════════════════════
+     RESET & BASE
+  ══════════════════════════════════════════════ */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; font-size: 16px; }
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-weight: 300;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+  img { max-width: 100%; display: block; }
+  a { color: inherit; text-decoration: none; }
+  button { cursor: pointer; border: none; background: none; font-family: inherit; }
+
+  /* ══════════════════════════════════════════════
+     UTILITY
+  ══════════════════════════════════════════════ */
+  .container { max-width: var(--max-width); margin: 0 auto; padding: 0 2rem; }
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    display: block;
+    margin-bottom: 0.75rem;
+  }
+  .divider { width: 48px; height: 1px; background: var(--accent); margin: 1.5rem 0; }
+
+  /* Noise texture */
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none; z-index: 9999; opacity: 0.4;
+  }
+
+  /* ══════════════════════════════════════════════
+     NAVIGATION
+  ══════════════════════════════════════════════ */
+  #site-nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(245,242,236,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--paper-dark);
+    transition: box-shadow var(--transition);
+  }
+  #site-nav.scrolled { box-shadow: 0 2px 24px rgba(26,23,20,0.08); }
+
+  .nav-inner {
+    display: flex; align-items: center; justify-content: space-between; height: 64px;
+  }
+
+  .nav-logo {
+    font-family: var(--font-display);
+    font-size: 1.2rem; font-weight: var(--display-weight);
+    color: var(--ink); transition: color var(--transition);
+  }
+  .nav-logo span { color: var(--accent); }
+  .nav-logo:hover { color: var(--accent); }
+
+  .nav-right { display: flex; align-items: center; gap: 1rem; }
+
+  .nav-links {
+    display: flex; align-items: center; gap: 1.75rem; list-style: none;
+  }
+  .nav-links a {
+    font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--ink-soft); position: relative; padding-bottom: 2px;
+    transition: color var(--transition);
+  }
+  .nav-links a::after {
+    content: ''; position: absolute; bottom: -2px; left: 0; right: 100%;
+    height: 1px; background: var(--accent); transition: right var(--transition);
+  }
+  .nav-links a:hover, .nav-links a.active { color: var(--ink); }
+  .nav-links a:hover::after, .nav-links a.active::after { right: 0; }
+
+  /* Font toggle button */
+  .font-toggle-btn {
+    font-family: var(--font-mono);
+    font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--ink-soft); border: 1px solid var(--paper-dark);
+    padding: 0.3rem 0.7rem; border-radius: 100px;
+    transition: all var(--transition); white-space: nowrap;
+  }
+  .font-toggle-btn:hover { border-color: var(--accent); color: var(--accent); }
+
+  .nav-cta {
+    font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--white); background: var(--accent);
+    padding: 0.4rem 1rem; border-radius: var(--radius);
+    transition: background var(--transition), transform var(--transition);
+  }
+  .nav-cta:hover { background: var(--ink); transform: translateY(-1px); }
+
+  .nav-hamburger { display: none; flex-direction: column; gap: 5px; padding: 4px; }
+  .nav-hamburger span { display: block; width: 22px; height: 1.5px; background: var(--ink); }
+
+  /* ══════════════════════════════════════════════
+     HERO
+  ══════════════════════════════════════════════ */
+  #hero {
+    min-height: 100vh;
+    display: grid; grid-template-columns: 1fr 1fr;
+    align-items: center; padding-top: 64px;
+    overflow: hidden; position: relative;
+  }
+  .hero-bg-stripe {
+    position: absolute; top: 0; right: 0; width: 48%; height: 100%;
+    background: var(--paper-mid); z-index: 0;
+  }
+  .hero-bg-stripe::before {
+    content: ''; position: absolute; inset: 0;
+    background: repeating-linear-gradient(-45deg, transparent, transparent 18px,
+      rgba(200,96,42,0.05) 18px, rgba(200,96,42,0.05) 19px);
+  }
+  .hero-content {
+    position: relative; z-index: 1;
+    padding: 4rem 3rem 4rem 2rem;
+    animation: fadeUp 0.9s ease both;
+  }
+  .hero-label {
+    font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.2em;
+    text-transform: uppercase; color: var(--accent);
+    display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1.5rem;
+  }
+  .hero-label::before { content: ''; display: block; width: 32px; height: 1px; background: var(--accent); }
+
+  .hero-name {
+    font-family: var(--font-display);
+    font-size: var(--heading-size-hero);
+    font-weight: var(--display-weight);
+    line-height: var(--heading-lh);
+    letter-spacing: -0.01em; margin-bottom: 0.5rem;
+  }
+  .hero-name em { font-style: var(--display-style); color: var(--accent); }
+
+  .hero-title {
+    font-family: var(--font-display); font-size: clamp(1rem, 2vw, 1.3rem);
+    font-weight: 300; color: var(--ink-soft); margin-bottom: 2rem; letter-spacing: 0.02em;
+  }
+  html[data-font="B"] .hero-title { font-family: var(--font-body); font-size: 1rem; font-weight: 400; }
+
+  .hero-intro {
+    font-size: 1rem; color: var(--ink-soft);
+    max-width: 440px; margin-bottom: 2.5rem; line-height: 1.8;
+  }
+  .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; align-items: center; }
+
+  .btn-primary {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    font-size: 0.76rem; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--white); background: var(--accent);
+    padding: 0.75rem 1.75rem; border-radius: var(--radius);
+    transition: background var(--transition), transform var(--transition), box-shadow var(--transition);
+  }
+  .btn-primary:hover { background: var(--ink); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(26,23,20,0.15); }
+
+  .btn-ghost {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    font-size: 0.76rem; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--ink); border: 1px solid var(--paper-dark);
+    padding: 0.75rem 1.75rem; border-radius: var(--radius);
+    transition: border-color var(--transition), color var(--transition), transform var(--transition);
+  }
+  .btn-ghost:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+
+  .hero-visual {
+    position: relative; z-index: 1; padding: 4rem 2rem;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    animation: fadeUp 0.9s 0.2s ease both;
+  }
+
+  /* ── Photo avatar ── */
+  .hero-avatar-wrap { position: relative; margin-bottom: 2.5rem; }
+  .hero-avatar {
+    width: 220px; height: 220px; border-radius: 50%;
+    object-fit: cover; object-position: center top;
+    border: 3px solid var(--paper-dark);
+    display: block;
+    background: var(--paper-dark); /* fallback colour while loading */
+  }
+  .hero-avatar-ring {
+    position: absolute; inset: -12px; border-radius: 50%;
+    border: 1px dashed var(--accent); opacity: 0.5;
+    animation: spin 20s linear infinite;
+  }
+
+  .hero-stats {
+    display: grid; grid-template-columns: repeat(3,1fr);
+    gap: 1px; background: var(--paper-dark);
+    border: 1px solid var(--paper-dark); border-radius: var(--radius);
+    overflow: hidden; width: 100%; max-width: 360px;
+  }
+  .stat { background: var(--paper); padding: 1.25rem 1rem; text-align: center; }
+  .stat-num { font-family: var(--font-display); font-size: 2rem; font-weight: 300; color: var(--accent); line-height: 1; display: block; }
+  html[data-font="B"] .stat-num { font-weight: 700; font-size: 1.75rem; }
+  .stat-label { font-size: 0.67rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-faint); margin-top: 0.3rem; display: block; }
+
+  /* ══════════════════════════════════════════════
+     ABOUT
+  ══════════════════════════════════════════════ */
+  #about { background: var(--white); padding: var(--section-pad); }
+  .about-grid { display: grid; grid-template-columns: 1fr 2fr; gap: 5rem; align-items: start; }
+  .about-sidebar h2 {
+    font-family: var(--font-display);
+    font-size: var(--heading-size-section);
+    font-weight: var(--display-weight); line-height: var(--heading-lh);
+    margin-bottom: 1.5rem;
+  }
+  .about-sidebar h2 em { font-style: var(--display-style); color: var(--accent); }
+  .about-location { display: flex; align-items: center; gap: 0.5rem; font-size: 0.82rem; color: var(--ink-soft); margin-bottom: 2rem; }
+  .about-location svg { color: var(--accent); flex-shrink: 0; }
+  .about-body p { font-size: 1.02rem; line-height: 1.85; color: var(--ink-soft); margin-bottom: 1.5rem; }
+  .about-body p strong { color: var(--ink); font-weight: 500; }
+  .about-highlights { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 2.5rem; }
+
+  /* ── About photo ── */
+  .about-photo {
+    width: 100%; aspect-ratio: 3/4; object-fit: cover; object-position: center top;
+    border-radius: var(--radius); margin-bottom: 1.5rem;
+    border: 1px solid var(--paper-dark);
+    background: var(--paper-dark);
+  }
+
+  .highlight-card {
+    background: var(--paper); border: 1px solid var(--paper-dark);
+    padding: 1.25rem 1.5rem; border-radius: var(--radius);
+    transition: border-color var(--transition), transform var(--transition);
+  }
+  .highlight-card:hover { border-color: var(--accent); transform: translateY(-2px); }
+  .highlight-card-icon { font-size: 1.3rem; margin-bottom: 0.5rem; display: block; }
+  .highlight-card h4 { font-size: 0.82rem; font-weight: 500; letter-spacing: 0.04em; margin-bottom: 0.3rem; }
+  .highlight-card p { font-size: 0.82rem; color: var(--ink-soft); line-height: 1.6; margin: 0; }
+
+  /* ══════════════════════════════════════════════
+     SKILLS — 7 categories
+  ══════════════════════════════════════════════ */
+  #skills { background: var(--paper); padding: var(--section-pad); }
+  .skills-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 3.5rem; flex-wrap: wrap; gap: 1.5rem; }
+  .skills-header h2 {
+    font-family: var(--font-display);
+    font-size: var(--heading-size-section);
+    font-weight: var(--display-weight); line-height: var(--heading-lh);
+  }
+  .skills-header h2 em { font-style: var(--display-style); color: var(--accent); }
+  .skills-tabs { display: flex; gap: 0.4rem; flex-wrap: wrap; }
+  .skill-tab {
+    font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase;
+    padding: 0.35rem 0.85rem; border: 1px solid var(--paper-dark);
+    border-radius: 100px; color: var(--ink-soft); background: transparent;
+    cursor: pointer; transition: all var(--transition);
+  }
+  .skill-tab:hover, .skill-tab.active { background: var(--accent); border-color: var(--accent); color: var(--white); }
+  .skills-panel { display: none; }
+  .skills-panel.active { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px,1fr)); gap: 1rem; animation: fadeUp 0.35s ease; }
+  .skill-chip {
+    background: var(--white); border: 1px solid var(--paper-dark);
+    padding: 1rem 1.25rem; border-radius: var(--radius);
+    display: flex; flex-direction: column; gap: 0.5rem;
+    transition: border-color var(--transition), transform var(--transition), box-shadow var(--transition);
+  }
+  .skill-chip:hover { border-color: var(--accent); transform: translateY(-2px); box-shadow: 0 4px 16px rgba(200,96,42,0.1); }
+  .skill-chip-name { font-size: 0.88rem; font-weight: 500; color: var(--ink); }
+  .skill-chip-level { height: 2px; background: var(--paper-dark); border-radius: 2px; overflow: hidden; }
+  .skill-chip-fill { height: 100%; background: var(--accent); border-radius: 2px; }
+  .skill-chip-meta { font-size: 0.68rem; color: var(--ink-faint); font-family: var(--font-mono); }
+
+  /* ══════════════════════════════════════════════
+     EXPERIENCE
+  ══════════════════════════════════════════════ */
+  #experience { background: var(--white); padding: var(--section-pad); }
+  .experience-header { margin-bottom: 3.5rem; }
+  .experience-header h2 {
+    font-family: var(--font-display);
+    font-size: var(--heading-size-section);
+    font-weight: var(--display-weight);
+  }
+  .experience-header h2 em { font-style: var(--display-style); color: var(--accent); }
+  .timeline { position: relative; padding-left: 2rem; }
+  .timeline::before {
+    content: ''; position: absolute; left: 0; top: 0; bottom: 0;
+    width: 1px; background: linear-gradient(to bottom, var(--accent), var(--paper-dark));
+  }
+  .timeline-item {
+    position: relative; margin-bottom: 3rem; padding-left: 2rem;
+    opacity: 0; transform: translateX(-16px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+  .timeline-item.visible { opacity: 1; transform: none; }
+  .timeline-dot {
+    position: absolute; left: -2.5rem; top: 0.4rem;
+    width: 10px; height: 10px; border-radius: 50%;
+    background: var(--accent); border: 2px solid var(--paper); box-shadow: 0 0 0 2px var(--accent);
+  }
+  .timeline-meta { display: flex; align-items: center; gap: 1rem; margin-bottom: 0.5rem; flex-wrap: wrap; }
+  .timeline-org { font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); font-family: var(--font-mono); }
+  .timeline-period { font-size: 0.7rem; color: var(--ink-faint); font-family: var(--font-mono); }
+  .timeline-role {
+    font-family: var(--font-display); font-size: 1.45rem;
+    font-weight: var(--display-weight); margin-bottom: 0.75rem; line-height: 1.2;
+  }
+  .timeline-bullets { list-style: none; padding: 0; }
+  .timeline-bullets li { font-size: 0.9rem; color: var(--ink-soft); line-height: 1.7; padding-left: 1rem; position: relative; margin-bottom: 0.4rem; }
+  .timeline-bullets li::before { content: '—'; position: absolute; left: 0; top: 0; color: var(--accent); font-size: 0.8rem; }
+
+  /* ══════════════════════════════════════════════
+     PROJECTS
+  ══════════════════════════════════════════════ */
+  #projects { background: var(--paper); padding: var(--section-pad); }
+  .projects-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 3.5rem; flex-wrap: wrap; gap: 1rem; }
+  .projects-header h2 {
+    font-family: var(--font-display);
+    font-size: var(--heading-size-section);
+    font-weight: var(--display-weight);
+  }
+  .projects-header h2 em { font-style: var(--display-style); color: var(--accent); }
+  .projects-filter { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+  .filter-btn {
+    font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase;
+    padding: 0.35rem 0.85rem; border: 1px solid var(--paper-dark);
+    border-radius: 100px; color: var(--ink-soft); background: transparent;
+    cursor: pointer; transition: all var(--transition);
+  }
+  .filter-btn:hover, .filter-btn.active { background: var(--ink); border-color: var(--ink); color: var(--white); }
+  .projects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(330px,1fr)); gap: 1.5rem; }
+  .project-card {
+    background: var(--white); border: 1px solid var(--paper-dark); border-radius: var(--radius);
+    overflow: hidden; display: flex; flex-direction: column;
+    transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+  }
+  .project-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(26,23,20,0.1); border-color: var(--accent); }
+
+  /* ── Project thumbnail with photo placeholder ── */
+  .project-thumb {
+    aspect-ratio: 16/9; position: relative; overflow: hidden;
+    background: var(--paper-mid);
+  }
+  .project-thumb img {
+    width: 100%; height: 100%; object-fit: cover; object-position: center top;
+    display: block;
+    filter: brightness(0.75) saturate(0.6);
+    transition: filter var(--transition), transform 0.4s ease;
+  }
+  .project-card:hover .project-thumb img { filter: brightness(0.65) saturate(0.5); transform: scale(1.03); }
+  .project-thumb-label {
+    position: absolute; bottom: 0.75rem; left: 0.75rem;
+    font-family: var(--font-mono); font-size: 0.63rem; letter-spacing: 0.12em; text-transform: uppercase;
+    background: var(--accent); color: var(--white); padding: 0.25rem 0.6rem; border-radius: var(--radius);
+  }
+  .project-thumb.coming-soon img { filter: brightness(0.5) saturate(0.3) grayscale(0.5); }
+  .project-thumb.coming-soon::after {
+    content: 'Coming Soon';
+    position: absolute; inset: 0;
+    background: rgba(245,242,236,0.5);
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--white);
+  }
+
+  .project-body { padding: 1.5rem; display: flex; flex-direction: column; gap: 0.75rem; flex: 1; }
+  .project-meta { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; }
+  .project-category { font-family: var(--font-mono); font-size: 0.63rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); }
+  .project-tools { display: flex; gap: 0.35rem; flex-wrap: wrap; }
+  .tool-badge { font-size: 0.62rem; padding: 0.15rem 0.5rem; border: 1px solid var(--paper-dark); border-radius: 100px; color: var(--ink-soft); font-family: var(--font-mono); letter-spacing: 0.06em; }
+  .project-title { font-family: var(--font-display); font-size: 1.3rem; font-weight: var(--display-weight); line-height: 1.2; }
+  .project-goal { font-size: 0.87rem; color: var(--ink-soft); line-height: 1.65; }
+  .project-audience { font-size: 0.76rem; color: var(--ink-faint); font-family: var(--font-mono); letter-spacing: 0.04em; }
+  .project-audience strong { color: var(--ink-soft); }
+  .project-actions { display: flex; gap: 0.75rem; margin-top: auto; padding-top: 0.75rem; border-top: 1px solid var(--paper-mid); }
+  .project-link { font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); display: flex; align-items: center; gap: 0.35rem; transition: gap var(--transition); }
+  .project-link:hover { gap: 0.6rem; }
+  .project-link.disabled { color: var(--ink-faint); pointer-events: none; }
+
+  /* ══════════════════════════════════════════════
+     TESTIMONIALS
+  ══════════════════════════════════════════════ */
+  #testimonials { background: var(--ink); padding: var(--section-pad); color: var(--paper); }
+  .testimonials-header { text-align: center; margin-bottom: 3rem; }
+  .testimonials-header .eyebrow { color: var(--gold); }
+  .testimonials-header h2 {
+    font-family: var(--font-display);
+    font-size: var(--heading-size-section);
+    font-weight: var(--display-weight); color: var(--paper);
+  }
+  .testimonials-header h2 em { font-style: var(--display-style); color: var(--gold); }
+  .testimonials-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px,1fr)); gap: 1.5rem; }
+  .testimonial-card {
+    background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08);
+    border-radius: var(--radius); padding: 2rem;
+    transition: border-color var(--transition);
+  }
+  .testimonial-card:hover { border-color: rgba(184,146,74,0.4); }
+  .testimonial-quote {
+    font-family: var(--font-display); font-size: 1.08rem; font-weight: 300;
+    line-height: 1.7; color: rgba(255,255,255,0.8); margin-bottom: 1.5rem; font-style: italic;
+  }
+  html[data-font="B"] .testimonial-quote { font-family: var(--font-body); font-style: normal; font-size: 0.95rem; }
+  .testimonial-quote::before { content: '\201C'; color: var(--gold); font-size: 1.5rem; line-height: 0; vertical-align: -0.4rem; margin-right: 0.2rem; }
+  .testimonial-author { display: flex; align-items: center; gap: 0.75rem; }
+  .testimonial-avatar {
+    width: 44px; height: 44px; border-radius: 50%;
+    object-fit: cover; object-position: center top;
+    border: 2px solid rgba(184,146,74,0.4);
+    background: rgba(255,255,255,0.1);
+    flex-shrink: 0;
+  }
+  .testimonial-name { font-size: 0.85rem; font-weight: 500; color: var(--paper); }
+  .testimonial-role { font-size: 0.7rem; color: rgba(255,255,255,0.4); font-family: var(--font-mono); }
+  .testimonial-note {
+    text-align: center; font-size: 0.78rem; color: rgba(255,255,255,0.25);
+    font-family: var(--font-mono); letter-spacing: 0.06em; margin-top: 1.5rem;
+    border-top: 1px solid rgba(255,255,255,0.06); padding-top: 1.5rem;
+  }
+
+  /* ══════════════════════════════════════════════
+     BLOG
+  ══════════════════════════════════════════════ */
+  #blog { background: var(--white); padding: var(--section-pad); }
+  .blog-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 3.5rem; flex-wrap: wrap; gap: 1rem; }
+  .blog-header h2 {
+    font-family: var(--font-display);
+    font-size: var(--heading-size-section);
+    font-weight: var(--display-weight);
+  }
+  .blog-header h2 em { font-style: var(--display-style); color: var(--accent); }
+  .blog-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px,1fr)); gap: 1.5rem; }
+  .blog-card {
+    border: 1px solid var(--paper-dark); border-radius: var(--radius);
+    overflow: hidden; display: flex; flex-direction: column;
+    transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+  }
+  .blog-card:hover { transform: translateY(-3px); box-shadow: 0 8px 32px rgba(26,23,20,0.08); border-color: var(--accent); }
+  .blog-card-thumb {
+    aspect-ratio: 16/9; overflow: hidden; background: var(--paper-mid);
+  }
+  .blog-card-thumb img {
+    width: 100%; height: 100%; object-fit: cover; object-position: center top;
+    filter: brightness(0.8) saturate(0.5);
+    transition: filter 0.3s ease, transform 0.4s ease;
+  }
+  .blog-card:hover .blog-card-thumb img { filter: brightness(0.7) saturate(0.4); transform: scale(1.03); }
+  .blog-card-top { padding: 1.5rem; background: var(--paper); flex: 1; }
+  .blog-date { font-family: var(--font-mono); font-size: 0.63rem; letter-spacing: 0.12em; color: var(--accent); text-transform: uppercase; display: block; margin-bottom: 0.75rem; }
+  .blog-card-title { font-family: var(--font-display); font-size: 1.3rem; font-weight: var(--display-weight); line-height: 1.25; margin-bottom: 0.75rem; }
+  .blog-card-excerpt { font-size: 0.87rem; color: var(--ink-soft); line-height: 1.65; }
+  .blog-card-foot { padding: 1rem 1.5rem; border-top: 1px solid var(--paper-dark); display: flex; justify-content: space-between; align-items: center; background: var(--white); }
+  .blog-tag { font-family: var(--font-mono); font-size: 0.63rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-soft); border: 1px solid var(--paper-dark); padding: 0.2rem 0.5rem; border-radius: 100px; }
+  .blog-read-more { font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); display: flex; align-items: center; gap: 0.35rem; transition: gap var(--transition); }
+  .blog-read-more:hover { gap: 0.6rem; }
+
+  /* ══════════════════════════════════════════════
+     CONTACT
+  ══════════════════════════════════════════════ */
+  #contact { background: var(--paper); padding: var(--section-pad); }
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
+  .contact-left h2 {
+    font-family: var(--font-display);
+    font-size: var(--heading-size-section);
+    font-weight: var(--display-weight); margin-bottom: 1rem;
+  }
+  .contact-left h2 em { font-style: var(--display-style); color: var(--accent); }
+  .contact-left p { font-size: 0.95rem; color: var(--ink-soft); line-height: 1.8; margin-bottom: 2rem; }
+  .contact-items { display: flex; flex-direction: column; gap: 1rem; }
+  .contact-item {
+    display: flex; align-items: center; gap: 1rem;
+    padding: 1rem 1.25rem; background: var(--white);
+    border: 1px solid var(--paper-dark); border-radius: var(--radius);
+    transition: border-color var(--transition), transform var(--transition);
+    text-decoration: none; color: inherit;
+  }
+  .contact-item:hover { border-color: var(--accent); transform: translateX(4px); }
+  .contact-item-icon {
+    width: 36px; height: 36px; background: var(--accent-light); border-radius: var(--radius);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--accent); font-size: 1rem; flex-shrink: 0;
+    font-family: var(--font-mono); font-size: 0.75rem; font-weight: 400;
+  }
+  .contact-item-label { font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--ink-faint); font-family: var(--font-mono); display: block; }
+  .contact-item-value { font-size: 0.9rem; font-weight: 500; color: var(--ink); }
+
+  .copy-email-btn {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--accent); border: 1px solid var(--accent-light);
+    background: var(--accent-light); padding: 0.4rem 0.9rem; border-radius: 100px;
+    cursor: pointer; transition: all var(--transition); margin-top: 0.5rem;
+  }
+  .copy-email-btn:hover { background: var(--accent); color: var(--white); border-color: var(--accent); }
+  .copy-email-btn.copied { background: var(--ink); color: var(--white); border-color: var(--ink); }
+
+  .contact-note {
+    font-size: 0.8rem; color: var(--ink-faint); font-style: italic;
+    margin-top: 1.5rem; line-height: 1.6;
+    padding: 1rem 1.25rem; background: var(--paper-mid);
+    border-left: 2px solid var(--accent); border-radius: 0 var(--radius) var(--radius) 0;
+  }
+
+  .social-strip { display: flex; gap: 0.75rem; margin-top: 1.5rem; flex-wrap: wrap; }
+  .social-link {
+    display: flex; align-items: center; gap: 0.5rem;
+    font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--ink-soft); border: 1px solid var(--paper-dark);
+    padding: 0.4rem 0.9rem; border-radius: 100px; transition: all var(--transition);
+  }
+  .social-link:hover { background: var(--ink); border-color: var(--ink); color: var(--white); }
+
+  .contact-right {}
+  .contact-right h3 {
+    font-family: var(--font-display); font-size: 1.5rem;
+    font-weight: var(--display-weight); margin-bottom: 1rem;
+  }
+  .contact-right p { font-size: 0.9rem; color: var(--ink-soft); line-height: 1.75; margin-bottom: 1.5rem; }
+  .contact-cta-block {
+    background: var(--white); border: 1px solid var(--paper-dark);
+    border-radius: var(--radius); padding: 2rem;
+  }
+  .contact-cta-block h3 {
+    font-family: var(--font-display); font-size: 1.5rem;
+    font-weight: var(--display-weight); margin-bottom: 0.75rem;
+  }
+  .contact-cta-block p { font-size: 0.88rem; color: var(--ink-soft); line-height: 1.75; margin-bottom: 1.5rem; }
+  .contact-cta-actions { display: flex; flex-direction: column; gap: 0.75rem; }
+
+  /* ══════════════════════════════════════════════
+     FOOTER
+  ══════════════════════════════════════════════ */
+  footer { background: var(--ink); color: rgba(255,255,255,0.5); padding: 2rem; }
+  .footer-inner { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+  .footer-logo { font-family: var(--font-display); font-size: 1rem; font-weight: var(--display-weight); color: rgba(255,255,255,0.7); }
+  .footer-copy { font-size: 0.76rem; }
+  .footer-links { display: flex; gap: 1.5rem; list-style: none; }
+  .footer-links a { font-size: 0.7rem; letter-spacing: 0.06em; text-transform: uppercase; color: rgba(255,255,255,0.35); transition: color var(--transition); }
+  .footer-links a:hover { color: rgba(255,255,255,0.8); }
+
+  /* ══════════════════════════════════════════════
+     MODAL
+  ══════════════════════════════════════════════ */
+  .modal-overlay {
+    display: none; position: fixed; inset: 0; z-index: 200;
+    background: rgba(26,23,20,0.7); backdrop-filter: blur(4px);
+    align-items: center; justify-content: center; padding: 2rem;
+  }
+  .modal-overlay.open { display: flex; }
+  .modal {
+    background: var(--white); border-radius: var(--radius);
+    max-width: 700px; width: 100%; max-height: 90vh; overflow-y: auto;
+    position: relative; animation: fadeUp 0.35s ease;
+  }
+  .modal-header { padding: 2rem 2rem 0; }
+  .modal-close {
+    position: absolute; top: 1rem; right: 1rem;
+    width: 32px; height: 32px; border-radius: 50%;
+    background: var(--paper); border: none; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--ink-soft); transition: background var(--transition);
+  }
+  .modal-close:hover { background: var(--paper-dark); }
+  .modal-body { padding: 1.5rem 2rem 2rem; }
+  .modal-section { margin-bottom: 1.5rem; }
+  .modal-section-label { font-family: var(--font-mono); font-size: 0.63rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent); display: block; margin-bottom: 0.4rem; }
+  .modal-section-content { font-size: 0.9rem; color: var(--ink-soft); line-height: 1.7; }
+  .modal-results { display: grid; grid-template-columns: repeat(3,1fr); gap: 1rem; margin-top: 0.5rem; }
+  .modal-result-item { text-align: center; padding: 1rem; background: var(--paper); border-radius: var(--radius); }
+  .modal-result-num { font-family: var(--font-display); font-size: 1.75rem; color: var(--accent); display: block; }
+  .modal-result-label { font-size: 0.72rem; color: var(--ink-soft); }
+  .modal-screenshot-area { background: var(--paper-mid); aspect-ratio: 16/9; border-radius: var(--radius); display: flex; align-items: center; justify-content: center; font-size: 0.82rem; color: var(--ink-faint); margin-top: 0.5rem; font-family: var(--font-mono); letter-spacing: 0.06em; }
+
+  /* ══════════════════════════════════════════════
+     ANIMATIONS & MOBILE
+  ══════════════════════════════════════════════ */
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: none; } }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  @media (max-width: 900px) {
+    #hero { grid-template-columns: 1fr; }
+    .hero-bg-stripe { display: none; }
+    .hero-content { padding: 3rem 0 1rem; }
+    .hero-visual { padding: 2rem 0; }
+    .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    .about-highlights { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 640px) {
+    .nav-links, .font-toggle-btn { display: none; }
+    .nav-hamburger { display: flex; }
+    .projects-grid, .blog-grid { grid-template-columns: 1fr; }
+  }
+
+  .mobile-nav {
+    display: none; position: fixed; inset: 0;
+    background: var(--white); z-index: 99;
+    flex-direction: column; align-items: center; justify-content: center; gap: 2rem;
+  }
+  .mobile-nav.open { display: flex; }
+  .mobile-nav a { font-family: var(--font-display); font-size: 2rem; font-weight: var(--display-weight); color: var(--ink); transition: color var(--transition); }
+  .mobile-nav a:hover { color: var(--accent); }
+  .mobile-nav-close { position: absolute; top: 1.25rem; right: 1.5rem; font-size: 1.5rem; color: var(--ink-soft); cursor: pointer; background: none; border: none; }
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════
+     NAVIGATION
+══════════════════════════════════════ -->
+<nav id="site-nav">
+  <div class="container nav-inner">
+    <a href="#hero" class="nav-logo">Hamed <span>Dolatkhahi</span></a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#blog">Writing</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <div class="nav-right">
+      <button class="font-toggle-btn" id="font-toggle" title="Switch font style">Font: A (Serif)</button>
+      <a href="#contact" class="nav-cta">Get in Touch</a>
+      <button class="nav-hamburger" id="hamburger" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<div class="mobile-nav" id="mobile-nav">
+  <button class="mobile-nav-close" id="mobile-close">✕</button>
+  <a href="#about" onclick="closeMobile()">About</a>
+  <a href="#skills" onclick="closeMobile()">Skills</a>
+  <a href="#experience" onclick="closeMobile()">Experience</a>
+  <a href="#projects" onclick="closeMobile()">Projects</a>
+  <a href="#blog" onclick="closeMobile()">Writing</a>
+  <a href="#contact" onclick="closeMobile()">Contact</a>
+</div>
+
+<!-- ══════════════════════════════════════
+     HERO
+══════════════════════════════════════ -->
+<section id="hero">
+  <div class="hero-bg-stripe"></div>
+  <div class="hero-content container" style="padding-left:2rem;padding-right:1rem;max-width:600px;margin:0;">
+    <div class="hero-label">Instructional Designer · eLearning Developer</div>
+    <h1 class="hero-name">Hamed<br><em>Dolatkhahi</em></h1>
+    <p class="hero-title">Designing Learning Experiences that Drive Performance</p>
+    <p class="hero-intro">I'm Hamed, an Instructional Designer and eLearning Developer based in London. I specialize in turning complex information into engaging, evidence-based digital learning solutions using ADDIE, SAM, and modern authoring tools.</p>
+    <div class="hero-actions">
+      <a href="#projects" class="btn-primary">View Portfolio →</a>
+      <a href="#contact" class="btn-ghost">Let's Talk</a>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="hero-avatar-wrap">
+      <!--
+        PHOTO — loaded directly from Google Drive.
+        If the image stops loading, replace the src with a self-hosted copy.
+        Google Drive direct-link format: https://drive.google.com/uc?export=view&id=FILE_ID
+      -->
+      <img
+        class="hero-avatar"
+        src="https://drive.google.com/uc?export=view&id=1bfe9gCEnVKeiT_jkCP8AWKxov8GAROQd"
+        alt="Hamed Dolatkhahi — Instructional Designer"
+        loading="eager"
+        onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+      />
+      <!-- Fallback initials block (shown if Drive image fails to load) -->
+      <div style="display:none;width:220px;height:220px;border-radius:50%;background:var(--paper-dark);align-items:center;justify-content:center;font-family:var(--font-display);font-size:3.5rem;color:var(--ink-faint);border:3px solid var(--paper-dark);">HD</div>
+      <div class="hero-avatar-ring"></div>
+    </div>
+
+    <div class="hero-stats">
+      <div class="stat"><span class="stat-num">9+</span><span class="stat-label">Years</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     ABOUT
+══════════════════════════════════════ -->
+<section id="about">
+  <div class="container about-grid">
+    <div class="about-sidebar">
+      <span class="eyebrow">About Me</span>
+      <img
+        class="about-photo"
+        src="https://drive.google.com/uc?export=view&id=1bfe9gCEnVKeiT_jkCP8AWKxov8GAROQd"
+        alt="Hamed Dolatkhahi"
+        loading="lazy"
+        onerror="this.style.display='none';"
+      />
+      <h2>Instructional Designer<br><em>eLearning Developer</em><br>L&D Specialist<br></h2>
+      <div class="about-location">
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+        London, UK
+      </div>
+      <div class="divider"></div>
+      <p style="font-size:0.82rem;color:var(--ink-soft);line-height:1.7;">Currently finalizing my Professional Diploma at the Digital Learning Institute, I combine 9 years of L&D leadership with hands-on digital development to bridge the gap between business goals and learner needs.</p>
+    </div>
+    <div class="about-body">
+      <p>My background in Engineering fuels how I approach learning: I think in systems, prototype rapidly, and obsess over whether a digital solution actually transforms behavior. This technical foundation allows me to bridge the gap between complex subject matter and engaging learner experiences.</p>
+
+      <p>Most recently, as Head of L&D at Rahnema College, I orchestrated the end-to-end lifecycle (TNA to Evaluation) for 24+ annual bootcamps and a community of 2,000+ learners. Beyond strategy, I remained deeply involved in the "craft"—designing curricula and multimedia assets that align human growth with business KPIs.</p>
+
+      <p>Now based in London and completing my Professional Diploma with the Digital Learning Institute, I am focusing on high-impact Instructional Design and eLearning Development. This portfolio showcases my current work in creating scenario-based modules, interactive prototypes (Genially/Storyline), and micro-learning assets that solve real-world performance gaps.</p>
+      <div class="about-highlights">
+        <div class="highlight-card"><span class="highlight-card-icon">🎯</span><h4>Evidence-Based Design</h4><p>Utilizing <strong>ADDIE & SAM</strong> to bridge performance gaps. I ensure every interactive element and content piece maps directly to a measurable learning objective.</p></div>
+        <div class="highlight-card"><span class="highlight-card-icon">⚙️</span><h4>Technical & Authoring Fluency</h4><p>My engineering background enables me to master <strong>eAuthoring tools</strong> rapidly and collaborate seamlessly with LMS admins and technical SMEs.</p></div>
+        <div class="highlight-card"><span class="highlight-card-icon">📊</span><h4>Impact & Iteration</h4><p>From <strong>NPS to behavioral metrics</strong>, I analyze learner data to evaluate effectiveness and continuously iterate for better learning ROI.</p></div>
+        <div class="highlight-card"><span class="highlight-card-icon">🌱</span><h4>Modern Learning Standards</h4><p>Committed to <strong>WCAG Accessibility</strong> and evidence-based design. I build high-quality, inclusive learning experiences that meet the rigorous professional standards of the UK's <strong>academic and corporate</strong> sectors.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     SKILLS — 7 categories
+══════════════════════════════════════ -->
+<section id="skills">
+  <div class="container">
+    <div class="skills-header">
+      <div>
+        <span class="eyebrow">Capabilities</span>
+        <h2>Skills &amp; <em>Tools</em></h2>
+      </div>
+      <div class="skills-tabs">
+        <button class="skill-tab active" data-panel="id">Methodologies</button>
+        <button class="skill-tab" data-panel="TLC">The Learning Cycle</button>
+        <button class="skill-tab" data-panel="Authoring">Authoring</button>
+        <button class="skill-tab" data-panel="web">Web</button>
+        <button class="skill-tab" data-panel="Platforms">Learning Technology</button>
+        <button class="skill-tab" data-panel="soft-skills">Collaborative & Soft Skills</button>
+      </div>
+    </div>
+    <div class="skills-panels">
+
+      <div class="skills-panel active" id="panel-id">
+        <div class="skill-chip"><div class="skill-chip-name">ADDIE Model</div><div class="skill-chip-level"><div class="skill-chip-fill" style="width:95%"></div></div><div class="skill-chip-meta">Expert · 9 yrs</div></div>
+        <div class="skill-chip"><div class="skill-chip-name">SAM Model</div><div class="skill-chip-level"><div class="skill-chip-fill" style="width:90%"></div></div><div class="skill-chip-meta">Expert · 7 yrs</div></div>
+        <div class="skill-chip"><div class="skill-chip-name">Backward Design</div><div class="skill-chip-level"><div class="skill-chip-fill" style="width:95%"></div></div><div class="skill-chip-meta">Expert · 9 yrs</div></div>
+      </div>
+
+      <div class="skills-panel" id="panel-TLC">
+        <div class="skill-chip"><div class="skill-chip-name">Needs Analysis (TNA)</div><div class="skill-chip-level"><div class="skill-chip-fill" style="width:88%"></div></div><div class="skill-chip-meta">Advanced</div></div>
+        <div class="skill-chip"><div class="skill-chip-name">Storyboarding</div><div class="skill-chip-level"><div class="skill-chip-fill" style="width:82%"></div></div><div class="skill-chip-meta">Proficient</div></div>
+        <div class="skill-chip"><div class="skill-chip-name">Rollout &<br>Implementation Strategy</div><div class="skill-chip-level"><div class="skill-chip-fill" style="width:92%"></div></div><div class="skill-chip-meta">Expert</div></div>
+        <div class="skill-chip"><div class="skill-chip-name">Evaluation<br>(Kirkpatrick Model)</div><div class="skill-chip-level"><div class="skill-chip-fill" style="width:90%"></div></div><div class="skill-chip-meta">Expert</div></div>
+      </div>
+
+      <div class="skills-panel" id="panel-Authoring">
+        <div class="skill-chip"><div class="skill-chip-name">Articulate<br>Storyline 360</div><div class="skill-chip-level"><div class="skill-chip-fill" style="width:90%"></div></div><div class="skill-chip-meta">Expert · 7 yrs</div></div>
+        <div class="skill-chip"><div class="skill-chip-name">Genially</div><div class="skill-chip-level"><div class="skill-chip-fill" style="width:80%"></div></div><div class="skill-chip-meta">Proficient</div></div>
+        <div class="skill-chip"><div class="skill-chip-name">Canva</div><div class="skill-chip-level"><div class="skill-chip-fill" style="width:88%"></div></div><div class="skill-chip-meta">Advanced</div></div>
+        <div class="skill-chip"><div class="skill-chip-name">Multimedia Production<br>(Video/Audio)</div><div class="skill-chip-level"><div class="skill-chip-fill" style="width:80%"></div></div><div class="skill-chip-meta">Proficient</div></div>
+      </div>
+
+      <div class="skills-panel" id="panel-web">
+        <div class="skill-chip"><div class="skill-chip-name">HTML</div><div class="skill-chip-level"><div class="skill-chip-fill" style="width:85%"></div></div><div class="skill-chip-meta">Advanced · 4 yrs</div></div>
+        <div class="skill-chip"><div class="skill-chip-name">CSS</div><div class="skill-chip-level"><div class="skill-chip-fill" style="width:85%"></div></div><div class="skill-chip-meta">Advanced</div></div>
+        <div class="skill-chip"><div class="skill-chip-name">Vibe Coding<br>(AI-assisted development)</div><div class="skill-chip-level"><div class="skill-chip-fill" style="width:82%"></div></div><div class="skill-chip-meta">Advanced</div></div>
+      </div>
+      
+      <div class="skills-panel" id="panel-Platforms">
+        <div class="skill-chip"><div class="skill-chip-name">LMS/VLE Administration</div><div class="skill-chip-level"><div class="skill-chip-fill" style="width:90%"></div></div><div class="skill-chip-meta">Expert</div></div>
+        <div class="skill-chip"><div class="skill-chip-name">Learning Experience Platforms (LXP)</div><div class="skill-chip-level"><div class="skill-chip-fill" style="width:90%"></div></div><div class="skill-chip-meta">Expert</div></div>
+        <div class="skill-chip"><div class="skill-chip-name">Moodle</div><div class="skill-chip-level"><div class="skill-chip-fill" style="width:88%"></div></div><div class="skill-chip-meta">Advanced</div></div>
+        <div class="skill-chip"><div class="skill-chip-name">Canvas</div><div class="skill-chip-level"><div class="skill-chip-fill" style="width:85%"></div></div><div class="skill-chip-meta">Advanced</div></div>
+        <div class="skill-chip"><div class="skill-chip-name">MS Teams</div><div class="skill-chip-level"><div class="skill-chip-fill" style="width:85%"></div></div><div class="skill-chip-meta">Advanced</div></div>
+        <div class="skill-chip"><div class="skill-chip-name">G-Suite</div><div class="skill-chip-level"><div class="skill-chip-fill" style="width:85%"></div></div><div class="skill-chip-meta">Advanced</div></div>
+        <div class="skill-chip"><div class="skill-chip-name">Zoom</div><div class="skill-chip-level"><div class="skill-chip-fill" style="width:85%"></div></div><div class="skill-chip-meta">Advanced</div></div>
+        <div class="skill-chip"><div class="skill-chip-name">SCORM/xAPI Standards</div><div class="skill-chip-level"><div class="skill-chip-fill" style="width:85%"></div></div><div class="skill-chip-meta">Advanced</div></div>
+      </div>
+
+      <div class="skills-panel" id="panel-soft-skills">
+        <div class="skill-chip"><div class="skill-chip-name">SME Partnership</div><div class="skill-chip-level"><div class="skill-chip-fill" style="width:90%"></div></div><div class="skill-chip-meta">Expert</div></div>
+        <div class="skill-chip"><div class="skill-chip-name">Stakeholder Management</div><div class="skill-chip-level"><div class="skill-chip-fill" style="width:88%"></div></div><div class="skill-chip-meta">Advanced</div></div>
+        <div class="skill-chip"><div class="skill-chip-name">Project Management</div><div class="skill-chip-level"><div class="skill-chip-fill" style="width:88%"></div></div><div class="skill-chip-meta">Advanced</div></div>
+        <div class="skill-chip"><div class="skill-chip-name">Teamwork</div><div class="skill-chip-level"><div class="skill-chip-fill" style="width:82%"></div></div><div class="skill-chip-meta">Advanced</div></div>
+        <div class="skill-chip"><div class="skill-chip-name">Problem Solving</div><div class="skill-chip-level"><div class="skill-chip-fill" style="width:85%"></div></div><div class="skill-chip-meta">Certified · 2023</div></div>
+        <div class="skill-chip"><div class="skill-chip-name">Agile Mindset</div><div class="skill-chip-level"><div class="skill-chip-fill" style="width:90%"></div></div><div class="skill-chip-meta">Expert</div></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     EXPERIENCE
+══════════════════════════════════════ -->
+<section id="experience">
+  <div class="container">
+    <div class="experience-header">
+      <span class="eyebrow">Career History</span>
+      <h2>Professional <em>Experience</em></h2>
+    </div>
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-meta"><span class="timeline-org">Rahnema College</span><span class="timeline-period">Sep 2022 – Apr 2025</span></div>
+        <div class="timeline-role">Head of Learning & Development</div>
+        <ul class="timeline-bullets">
+          <li>Architected end-to-end learning ecosystems for 24+ annual professional bootcamps, ensuring alignment between industry skill gaps and curriculum design.</li>
+          <li>Led the transition to blended learning models, utilizing TNA (Training Needs Analysis) to define clear learning objectives and success metrics for over 2,000 learners.</li>
+          <li>Collaborated with senior leadership and industry partners to ensure training programs delivered measurable ROI and high completion rates.</li>
+        </ul>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-meta"><span class="timeline-org">Linka (Rahnema College Career Platform)</span><span class="timeline-period">Apr 2021 – Apr 2025</span></div>
+        <div class="timeline-role">Service Designer (EdTech)</div>
+        <ul class="timeline-bullets">
+          <li>Applied Service Design principles to map user journeys and create features including a resume builder, job board, and coaching services.</li>
+          <li>Designed the operational blueprint for an EdTech platform, mapping touchpoints between learners, mentors, and the technology stack.</li>
+          <li>Translated user insights into prioritised product backlogs and shipped iterative releases in an agile environment.</li>
+          <li>Defined competency frameworks and career progression paths for various technical roles.</li>
+        </ul>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-meta"><span class="timeline-org">Rahnema College</span><span class="timeline-period">Apr 2019 – Mar 2021</span></div>
+        <div class="timeline-role">Learning Experience Designer</div>
+        <ul class="timeline-bullets">
+          <li>Applied User Research and Persona Mapping to design end-to-end learning journeys.</li>
+          <li>Architected performance-driven learning programmes using adult learning frameworks to build measurable learning experiences.</li>
+          <li>Designed digital learning experiences including eLearning modules, courses scripts, and micro-learning assets transforming complex technical processes into clear, interactive journeys.</li>
+        </ul>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-meta"><span class="timeline-org">Rahnema College</span><span class="timeline-period">Nov 2016 – Mar 2019</span></div>
+        <div class="timeline-role">L&D Specialist</div>
+        <ul class="timeline-bullets">
+          <li>Collaborated with technical Subject Matter Experts (SMEs) to translate complex engineering and product concepts into engaging multimedia training assets.</li>
+          <li>Applied ADDIE and SAM frameworks to design detailed storyboards, interactive exercises, and assessment modules.</li>
+          <li>Oversaw the rollout of digital content on the internal learning platform, tracking learner progression and iterating based on feedback (NPS).</li>
+        </ul>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-meta"><span class="timeline-org">Sharif Career School</span><span class="timeline-period">Oct 2015 – Oct 2016</span></div>
+        <div class="timeline-role">L&D Coordinator</div>
+        <ul class="timeline-bullets">
+          <li>Facilitated smooth delivery of training sessions, managing student and tutor expectations.</li>
+          <li>Managed the day-to-day administration of the Learning Management System, ensuring a seamless digital experience for students and tutors.</li>
+          <li>Provided technical troubleshooting and pedagogical support, ensuring all learning resources were accessible and functional.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     PROJECTS
+══════════════════════════════════════ -->
+<section id="projects">
+  <div class="container">
+    <div class="projects-header">
+      <div>
+        <span class="eyebrow">Portfolio</span>
+        <h2>Featured <em>Projects</em></h2>
+      </div>
+      <div class="projects-filter">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="elearning">eLearning</button>
+        <button class="filter-btn" data-filter="curriculum">Curriculum</button>
+        <button class="filter-btn" data-filter="strategy">Strategy</button>
+      </div>
+    </div>
+    <div class="projects-grid" id="projects-grid">
+
+      <!-- PROJECT 1 — Coming soon sample -->
+      <article class="project-card" data-category="elearning" data-project="1">
+        <div class="project-thumb coming-soon">
+          <img
+            src="https://drive.google.com/uc?export=view&id=1bfe9gCEnVKeiT_jkCP8AWKxov8GAROQd"
+            alt="Compliance eLearning Module"
+            loading="lazy"
+          />
+          <span class="project-thumb-label">eLearning</span>
+        </div>
+        <div class="project-body">
+          <div class="project-meta">
+            <span class="project-category">Scenario-based Course</span>
+            <div class="project-tools"><span class="tool-badge">Storyline 360</span><span class="tool-badge">ADDIE</span></div>
+          </div>
+          <h3 class="project-title">Compliance eLearning Module <span style="font-size:0.8em;color:var(--ink-faint)">(In Progress)</span></h3>
+          <p class="project-goal">A scenario-based compliance course using branching logic to help employees navigate real-world ethical dilemmas — designed from scratch as a UK portfolio piece.</p>
+          <p class="project-audience"><strong>Audience:</strong> New starters, mid-level professionals · <strong>Duration:</strong> 25 min</p>
+          <div class="project-actions">
+            <span class="project-link disabled">Preview coming soon</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- PROJECT 2 — With detail page -->
+      <article class="project-card" data-category="curriculum" data-project="2">
+        <div class="project-thumb">
+          <img
+            src="https://drive.google.com/uc?export=view&id=1bfe9gCEnVKeiT_jkCP8AWKxov8GAROQd"
+            alt="24+ Tech Bootcamps"
+            loading="lazy"
+          />
+          <span class="project-thumb-label">Curriculum</span>
+        </div>
+        <div class="project-body">
+          <div class="project-meta">
+            <span class="project-category">Curriculum Design</span>
+            <div class="project-tools"><span class="tool-badge">SAM</span><span class="tool-badge">LMS</span></div>
+          </div>
+          <h3 class="project-title">24+ Annual Tech Bootcamps</h3>
+          <p class="project-goal">Designed and oversaw an entire annual portfolio of intensive technical bootcamps — from TNA and programme design to post-training evaluation and iteration.</p>
+          <p class="project-audience"><strong>Audience:</strong> Career changers, tech professionals · <strong>Scale:</strong> 1,000s of learners</p>
+          <div class="project-actions">
+            <a href="project-template.html" class="project-link">Full Case Study →</a>
+            <a href="#" class="project-link" onclick="openModal(2); return false;">Quick View</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- PROJECT 3 — With detail page -->
+      <article class="project-card" data-category="strategy" data-project="3">
+        <div class="project-thumb">
+          <img
+            src="https://drive.google.com/uc?export=view&id=1bfe9gCEnVKeiT_jkCP8AWKxov8GAROQd"
+            alt="Sleep for Performance"
+            loading="lazy"
+          />
+          <span class="project-thumb-label">eLearning</span>
+        </div>
+        <div class="project-body">
+          <div class="project-meta">
+            <span class="project-category">Instructiol Design / Scenario-based Learning</span>
+            <div class="project-tools"><span class="tool-badge">Prototype</span><span class="tool-badge">Genially</span><span class="tool-badge">ADDIE</span></div>
+          </div>
+          <h3 class="project-title">An evidence-based digital learning solution for high-growth tech startups.</h3>
+          <p class="project-goal">Addressing a 15% productivity drop at a London-based startup by transforming sleep science into actionable workplace habits.</p>
+          <div class="project-actions">
+            <a href="project-template.html" class="project-link">Full Case Study →</a>
+            <a href="#" class="project-link" onclick="openModal(3); return false;">Quick View</a>
+          </div>
+        </div>
+      </article>
+
+    </div>
+    <p style="margin-top:2rem;font-size:0.8rem;color:var(--ink-faint);font-family:var(--font-mono);text-align:center;letter-spacing:0.06em;">✦ New eLearning samples being built — check back soon ✦</p>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     TESTIMONIALS
+══════════════════════════════════════ -->
+<section id="testimonials">
+  <div class="container">
+    <div class="testimonials-header">
+      <span class="eyebrow">Social Proof</span>
+      <h2>What People <em>Say</em></h2>
+    </div>
+    <div class="testimonials-grid">
+
+      <!-- SAMPLE TESTIMONIAL — edit text, name, role. Replace photo src if needed. -->
+      <div class="testimonial-card">
+        <div class="testimonial-quote">His combination of technical thinking, instructional design skills, and genuine care for learners makes him an exceptional L&D professional. I would gladly work with him again and fully recommend him to any team looking for a capable and thoughtful learning designer.</div>
+        <div class="testimonial-author">
+          <img
+            class="testimonial-avatar"
+            src="https://drive.google.com/uc?export=view&id=1bfe9gCEnVKeiT_jkCP8AWKxov8GAROQd"
+            alt="Testimonial author"
+            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+          />
+          <div style="display:none;width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,0.1);align-items:center;justify-content:center;font-family:var(--font-display);font-size:1rem;color:var(--gold);flex-shrink:0;">AB</div>
+          <div>
+            <div class="testimonial-name">Mehran Aliabadi</div>
+            <div class="testimonial-role">Senior Performance Marketing Manager · Snapp!</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card">
+        <div class="testimonial-quote">I highly recommend Hamed for any role that needs a skilled project manager, a smart process designer, and—most importantly—an adaptable, hands-on, and inspiring leader. Any team would be lucky to have him!</div>
+        <div class="testimonial-author">
+          <img
+            class="testimonial-avatar"
+            src="https://drive.google.com/uc?export=view&id=1bfe9gCEnVKeiT_jkCP8AWKxov8GAROQd"
+            alt="Testimonial author"
+            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+          />
+          <div style="display:none;width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,0.1);align-items:center;justify-content:center;font-family:var(--font-display);font-size:1rem;color:var(--gold);flex-shrink:0;">AB</div>
+          <div>
+            <div class="testimonial-name">Farzaneh Mahmoodi</div>
+            <div class="testimonial-role">Workday Specialist – People Analytics · Intact</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card">
+        <div class="testimonial-quote">Having Hamed in your team brings a great sense of confidence. He can be a key member of any team. Hamed is hardworking and has a strong ability to manage both tasks and people. He can lead important projects to success.</div>
+        <div class="testimonial-author">
+          <img
+            class="testimonial-avatar"
+            src="https://drive.google.com/uc?export=view&id=1bfe9gCEnVKeiT_jkCP8AWKxov8GAROQd"
+            alt="Testimonial author"
+            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+          />
+          <div style="display:none;width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,0.1);align-items:center;justify-content:center;font-family:var(--font-display);font-size:1rem;color:var(--gold);flex-shrink:0;">AB</div>
+          <div>
+            <div class="testimonial-name">Mohammad Shahrmiany</div>
+            <div class="testimonial-role">CEO · Rahnema College</div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Add more testimonial-card blocks here as you collect them -->
+
+    </div>
+    <p class="testimonial-note">✦ More recommendations on <a href="https://linkedin.com/in/hamed-dolatkhahi" target="_blank" style="color:var(--gold);text-decoration:underline;">LinkedIn</a> ✦</p>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     BLOG / WRITING
+══════════════════════════════════════ -->
+<section id="blog">
+  <div class="container">
+    <div class="blog-header">
+      <div>
+        <span class="eyebrow">Thinking Out Loud</span>
+        <h2>Writing &amp; <em>Reflections</em></h2>
+      </div>
+      <a href="#" class="btn-ghost" style="font-size:0.72rem;padding:0.5rem 1rem;">All Articles →</a>
+    </div>
+    <div class="blog-grid">
+
+      <!-- SAMPLE BLOG ENTRY — edit title, excerpt, date, tag. Link to blog-template.html -->
+      <article class="blog-card">
+        <div class="blog-card-thumb">
+          <img
+            src="https://drive.google.com/uc?export=view&id=1bfe9gCEnVKeiT_jkCP8AWKxov8GAROQd"
+            alt="Blog post thumbnail"
+            loading="lazy"
+          />
+        </div>
+        <div class="blog-card-top">
+          <span class="blog-date">March 2026</span>
+          <h3 class="blog-card-title">What Relocating Taught Me About Instructional Design</h3>
+          <p class="blog-card-excerpt">Moving from a Head of L&D role in Tehran to building a portfolio from scratch in London has been one of the most clarifying professional experiences of my life. Here's what I've learned about designing for new contexts.</p>
+        </div>
+        <div class="blog-card-foot">
+          <span class="blog-tag">Reflection</span>
+          <a href="blog-template.html" class="blog-read-more">Read →</a>
+        </div>
+      </article>
+
+      <!-- Add more blog-card blocks here as you write articles -->
+      <!-- Template: copy the article block above, update title/date/excerpt/tag, change href to the article file -->
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     CONTACT
+══════════════════════════════════════ -->
+<section id="contact">
+  <div class="container contact-grid">
+    <div class="contact-left">
+      <span class="eyebrow">Get in Touch</span>
+      <h2>Let's Work<br><em>Together</em></h2>
+      <p>I'm open to freelance projects, contract engagements, and full-time opportunities in instructional design and eLearning development — particularly in London and across the UK.</p>
+
+      <div class="contact-items">
+        <a href="mailto:hamed.dolatkhahi@gmail.com" class="contact-item">
+          <div class="contact-item-icon">✉</div>
+          <div class="contact-item-text">
+            <span class="contact-item-label">Email</span>
+            <span class="contact-item-value">hamed.dolatkhahi@gmail.com</span>
+          </div>
+        </a>
+        <a href="https://linkedin.com/in/hamed-dolatkhahi" target="_blank" rel="noopener" class="contact-item">
+          <div class="contact-item-icon">in</div>
+          <div class="contact-item-text">
+            <span class="contact-item-label">LinkedIn</span>
+            <span class="contact-item-value">linkedin.com/in/hamed-dolatkhahi</span>
+          </div>
+        </a>
+      </div>
+
+      <button class="copy-email-btn" id="copy-email-btn" onclick="copyEmail()">
+        📋 Copy Email Address
+      </button>
+<!--
+      <div class="contact-note">
+        I prefer being reached via email or LinkedIn — both go directly to me. I aim to reply within 1–2 business days.
+      </div>
+-->
+      <div class="social-strip">
+        <a href="https://linkedin.com/in/hamed-dolatkhahi" target="_blank" rel="noopener" class="social-link">LinkedIn</a>
+        <!-- Add more: <a href="#" class="social-link">Twitter / X</a> -->
+      </div>
+    </div>
+
+    <div class="contact-cta-block">
+      <h3>Ready to connect?</h3>
+      <p>Whether you have a project in mind, want to discuss instructional design, or are considering me for a role — I'd love to hear from you. The quickest routes are below.</p>
+      <div class="contact-cta-actions">
+        <a href="mailto:hamed.dolatkhahi@gmail.com" class="btn-primary" style="justify-content:center;">
+          ✉ Send me an email
+        </a>
+        <a href="https://linkedin.com/in/hamed-dolatkhahi" target="_blank" rel="noopener" class="btn-ghost" style="justify-content:center;">
+          Connect on LinkedIn →
+        </a>
+      </div>
+<!--
+            <p style="margin-top:1.5rem;font-size:0.8rem;color:var(--ink-faint);font-family:var(--font-mono);letter-spacing:0.04em;">
+        No contact form — just direct, personal communication.
+      </p>>
+-->
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     FOOTER
+══════════════════════════════════════ -->
+<footer>
+  <div class="container footer-inner">
+    <div class="footer-logo">Hamed Dolatkhahi</div>
+    <p class="footer-copy">© 2026 · Instructional Designer & L&D Specialist · London, UK</p>
+    <ul class="footer-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#blog">Writing</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</footer>
+
+<!-- ══════════════════════════════════════
+     MODAL (Quick View)
+══════════════════════════════════════ -->
+<div class="modal-overlay" id="modal-overlay" onclick="closeModalOnOverlay(event)">
+  <div class="modal" id="modal">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div class="modal-header" id="modal-header"></div>
+    <div class="modal-body" id="modal-body"></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     JAVASCRIPT
+══════════════════════════════════════ -->
+<script>
+  /* ── Nav scroll ── */
+  window.addEventListener('scroll', () => {
+    document.getElementById('site-nav').classList.toggle('scrolled', window.scrollY > 40);
+  });
+
+  /* ── Active nav link ── */
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-links a');
+  new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) navLinks.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + e.target.id));
+    });
+  }, { threshold: 0.4 }).observe && sections.forEach(s => {
+    new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) navLinks.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + e.target.id)); });
+    }, { threshold: 0.4 }).observe(s);
+  });
+
+  /* ── Mobile nav ── */
+  document.getElementById('hamburger').addEventListener('click', () => document.getElementById('mobile-nav').classList.add('open'));
+  document.getElementById('mobile-close').addEventListener('click', () => document.getElementById('mobile-nav').classList.remove('open'));
+  function closeMobile() { document.getElementById('mobile-nav').classList.remove('open'); }
+
+  /* ── Font toggle ── */
+  const html = document.documentElement;
+  const toggleBtn = document.getElementById('font-toggle');
+  let currentFont = localStorage.getItem('hd-font') || 'A';
+  applyFont(currentFont);
+
+  function applyFont(f) {
+    html.setAttribute('data-font', f);
+    toggleBtn.textContent = f === 'A' ? 'Font: A (Serif)' : 'Font: B (Syne)';
+    localStorage.setItem('hd-font', f);
+    currentFont = f;
+  }
+  toggleBtn.addEventListener('click', () => applyFont(currentFont === 'A' ? 'B' : 'A'));
+
+  /* ── Skills tabs ── */
+  document.querySelectorAll('.skill-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      document.querySelectorAll('.skill-tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.skills-panel').forEach(p => p.classList.remove('active'));
+      tab.classList.add('active');
+      document.getElementById('panel-' + tab.dataset.panel).classList.add('active');
+    });
+  });
+
+  /* ── Timeline reveal ── */
+  document.querySelectorAll('.timeline-item').forEach((item, i) => {
+    new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) setTimeout(() => e.target.classList.add('visible'), i * 80); });
+    }, { threshold: 0.15 }).observe(item);
+  });
+
+  /* ── Project filter ── */
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const filter = btn.dataset.filter;
+      document.querySelectorAll('.project-card').forEach(card => {
+        card.style.display = (filter === 'all' || card.dataset.category === filter) ? '' : 'none';
+      });
+    });
+  });
+
+  /* ── Copy email ── */
+  function copyEmail() {
+    navigator.clipboard.writeText('hamed.dolatkhahi@gmail.com').then(() => {
+      const btn = document.getElementById('copy-email-btn');
+      btn.textContent = '✓ Copied!';
+      btn.classList.add('copied');
+      setTimeout(() => { btn.textContent = '📋 Copy Email Address'; btn.classList.remove('copied'); }, 2500);
+    });
+  }
+
+  /* ── Modal ── */
+  const projectData = {
+    2: {
+      category: 'Curriculum Design', org: 'Rahnema College · 2016 – 2025', title: '24+ Annual Tech Bootcamps',
+      goal: 'Design and deliver a full annual portfolio of intensive technical bootcamps covering software engineering, product management, UX, and data science tracks for career changers and professionals.',
+      audience: 'Career changers, junior professionals, and individuals seeking intensive upskilling in technology — ranging in age from 20–40, predominantly self-motivated adult learners.',
+      process: 'Applied ADDIE across all programmes: conducted TNA with employer and learner stakeholders, designed modular curricula with integrated assessments, worked with SMEs to develop content, built LMS journeys, and ran iterative post-programme evaluation cycles.',
+      tools: 'Instructional Design: ADDIE/SAM · LMS Platform · Google Workspace · Articulate tools · Data dashboards (NPS, completion, progression)',
+      results: [{num:'24+',label:'Annual bootcamps'},{num:'1000s',label:'Learners reached'},{num:'9 yrs',label:'Programme history'}],
+      screenshot: 'Add screenshots, slide decks, or a PDF walkthrough here'
+    },
+    3: {
+      category: 'EdTech Service Design', org: 'Rahnema College · 2021 – 2025', title: 'Linka Career Platform',
+      goal: 'Design and build a career platform for tech graduates and career changers, bridging the gap between education and employment through tools, coaching, and curated job opportunities.',
+      audience: 'Recent tech bootcamp graduates and career changers seeking their first or next tech role, needing guided support navigating the job market and presenting their skills.',
+      process: 'Applied Service Design: mapped user journeys end-to-end, ran user research, defined personas, created service blueprints, and iterated features in collaboration with a product and dev team.',
+      tools: 'Service Design: journey mapping, persona research, service blueprinting · Agile / backlog management · CRM / HRIS',
+      results: [{num:'2000+',label:'Community members'},{num:'3',label:'Core features built'},{num:'4 yrs',label:'Platform lifetime'}],
+      screenshot: 'Platform screenshots / walkthrough video — add media here'
+    }
+  };
+
+  function openModal(id) {
+    const p = projectData[id]; if (!p) return;
+    document.getElementById('modal-header').innerHTML = `<span style="font-family:var(--font-mono);font-size:0.63rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--accent)">${p.category} · ${p.org}</span><h2 style="font-family:var(--font-display);font-size:1.9rem;font-weight:var(--display-weight);line-height:1.15;margin-top:0.4rem">${p.title}</h2>`;
+    document.getElementById('modal-body').innerHTML = `
+      <div class="modal-section"><span class="modal-section-label">Goal</span><div class="modal-section-content">${p.goal}</div></div>
+      <div class="modal-section"><span class="modal-section-label">Audience Persona</span><div class="modal-section-content">${p.audience}</div></div>
+      <div class="modal-section"><span class="modal-section-label">Design Process</span><div class="modal-section-content">${p.process}</div></div>
+      <div class="modal-section"><span class="modal-section-label">Tools & Methods</span><div class="modal-section-content">${p.tools}</div></div>
+      <div class="modal-section"><span class="modal-section-label">Results</span><div class="modal-results">${p.results.map(r=>`<div class="modal-result-item"><span class="modal-result-num">${r.num}</span><span class="modal-result-label">${r.label}</span></div>`).join('')}</div></div>
+      <div class="modal-section"><span class="modal-section-label">Screenshots / Walkthrough</span><div class="modal-screenshot-area">[ ${p.screenshot} ]</div></div>
+    `;
+    document.getElementById('modal-overlay').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeModal() { document.getElementById('modal-overlay').classList.remove('open'); document.body.style.overflow = ''; }
+  function closeModalOnOverlay(e) { if (e.target === document.getElementById('modal-overlay')) closeModal(); }
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+</script>
+</body>
+</html>
