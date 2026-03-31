@@ -159,7 +159,7 @@
   }
   .hero-content {
     position: relative; z-index: 1;
-    padding: 4rem 3rem 4rem 4rem;
+    padding: 4rem 3rem 4rem 7rem;
     animation: fadeUp 0.9s ease both;
   }
   .hero-label {
@@ -345,14 +345,6 @@
     font-weight: var(--display-weight);
   }
   .projects-header h2 em { font-style: var(--display-style); color: var(--accent); }
-  .projects-filter { display: flex; gap: 0.5rem; flex-wrap: wrap; }
-  .filter-btn {
-    font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase;
-    padding: 0.35rem 0.85rem; border: 1px solid var(--paper-dark);
-    border-radius: 100px; color: var(--ink-soft); background: transparent;
-    cursor: pointer; transition: all var(--transition);
-  }
-  .filter-btn:hover, .filter-btn.active { background: var(--ink); border-color: var(--ink); color: var(--white); }
   .projects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(330px,1fr)); gap: 1.5rem; }
   .project-card {
     background: var(--white); border: 1px solid var(--paper-dark); border-radius: var(--radius);
@@ -414,16 +406,18 @@
     font-weight: var(--display-weight); color: var(--paper);
   }
   .testimonials-header h2 em { font-style: var(--display-style); color: var(--gold); }
-  .testimonials-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px,1fr)); gap: 1.5rem; }
+  .testimonials-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px,1fr)); gap: 1.5rem; align-items: stretch; }
   .testimonial-card {
     background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08);
     border-radius: var(--radius); padding: 2rem;
     transition: border-color var(--transition);
+    display: flex; flex-direction: column;
   }
   .testimonial-card:hover { border-color: rgba(184,146,74,0.4); }
   .testimonial-quote {
     font-family: var(--font-display); font-size: 1.08rem; font-weight: 300;
-    line-height: 1.7; color: rgba(255,255,255,0.8); margin-bottom: 1.5rem; font-style: italic;
+    line-height: 1.7; color: rgba(255,255,255,1); margin-bottom: 1.5rem; font-style: italic;
+    flex: 1;
   }
   .testimonial-quote::before { content: '\201C'; color: var(--gold); font-size: 1.5rem; line-height: 0; vertical-align: -0.4rem; margin-right: 0.2rem; }
   .testimonial-author { display: flex; align-items: center; gap: 0.75rem; }
@@ -513,31 +507,12 @@
   .contact-item-label { font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--ink-faint); font-family: var(--font-mono); display: block; }
   .contact-item-value { font-size: 0.9rem; font-weight: 500; color: var(--ink); }
 
-  .copy-email-btn {
-    display: inline-flex; align-items: center; gap: 0.5rem;
-    font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase;
-    color: var(--accent); border: 1px solid var(--accent-light);
-    background: var(--accent-light); padding: 0.4rem 0.9rem; border-radius: 100px;
-    cursor: pointer; transition: all var(--transition); margin-top: 0.5rem;
-  }
-  .copy-email-btn:hover { background: var(--accent); color: var(--white); border-color: var(--accent); }
-  .copy-email-btn.copied { background: var(--ink); color: var(--white); border-color: var(--ink); }
-
   .contact-note {
     font-size: 0.8rem; color: var(--ink-faint); font-style: italic;
     margin-top: 1.5rem; line-height: 1.6;
     padding: 1rem 1.25rem; background: var(--paper-mid);
     border-left: 2px solid var(--accent); border-radius: 0 var(--radius) var(--radius) 0;
   }
-
-  .social-strip { display: flex; gap: 0.75rem; margin-top: 1.5rem; flex-wrap: wrap; }
-  .social-link {
-    display: flex; align-items: center; gap: 0.5rem;
-    font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase;
-    color: var(--ink-soft); border: 1px solid var(--paper-dark);
-    padding: 0.4rem 0.9rem; border-radius: 100px; transition: all var(--transition);
-  }
-  .social-link:hover { background: var(--ink); border-color: var(--ink); color: var(--white); }
 
 
   /* ══════════════════════════════════════════════
@@ -635,30 +610,6 @@
      DOWNLOADABLE FILES BAR
      Sits just above the footer. Add more .download-file links as needed.
   ══════════════════════════════════════════════ */
-  #downloads {
-    background: var(--ink);
-    padding: 1.1rem 2rem;
-  }
-  .downloads-inner {
-    max-width: var(--max-width); margin: 0 auto;
-    display: flex; align-items: center; gap: 2rem; flex-wrap: wrap;
-    justify-content: space-between;
-  }
-  .downloads-label {
-    font-family: var(--font-mono); font-size: 0.65rem; letter-spacing: 0.16em;
-    text-transform: uppercase; color: rgba(255,255,255,0.35);
-    white-space: nowrap;
-  }
-  .downloads-files { display: flex; gap: 0.75rem; flex-wrap: wrap; }
-  .download-file {
-    display: inline-flex; align-items: center; gap: 0.5rem;
-    font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase;
-    color: rgba(255,255,255,0.7); border: 1px solid rgba(255,255,255,0.12);
-    padding: 0.4rem 1rem; border-radius: var(--radius);
-    transition: border-color var(--transition), color var(--transition), background var(--transition);
-  }
-  .download-file:hover { border-color: var(--accent); color: var(--white); background: rgba(200,96,42,0.18); }
-  .download-file-icon { font-size: 0.85rem; opacity: 0.8; }
 </style>
 </head>
 <body>
@@ -710,7 +661,7 @@
 ══════════════════════════════════════ -->
 <section id="hero">
   <div class="hero-bg-stripe"></div>
-  <div class="hero-content container" style="padding-left:4rem;padding-right:1rem;max-width:620px;margin:0;">
+  <div class="hero-content container" style="padding-left:7rem;padding-right:1rem;max-width:660px;margin:0;">
     <div class="hero-label">Instructional Designer · eLearning Developer</div>
     <h1 class="hero-name">Hamed<br><em>Dolatkhahi</em></h1>
     <p class="hero-title">Designing Learning Experiences that Drive Performance</p>
@@ -943,13 +894,7 @@
         <span class="eyebrow">Portfolio</span>
         <h2>Featured <em>Projects</em></h2>
       </div>
-      <div class="projects-filter">
-        <button class="filter-btn active" data-filter="all">All</button>
-        <button class="filter-btn" data-filter="elearning">eLearning</button>
-        <button class="filter-btn" data-filter="curriculum">Curriculum</button>
-        <button class="filter-btn" data-filter="strategy">Strategy</button>
       </div>
-    </div>
     <div class="projects-grid" id="projects-grid">
 
       <!-- PROJECT 1 — Coming soon sample -->
@@ -1060,7 +1005,7 @@
       </div>
 
       <div class="testimonial-card">
-        <div class="testimonial-quote">I highly recommend Hamed for any role that needs a skilled project manager, a smart process designer, and—most importantly—an adaptable, hands-on, and inspiring leader. Any team would be lucky to have him!<br></div>
+        <div class="testimonial-quote">I highly recommend Hamed for any role that needs a skilled project manager, a smart process designer, and—most importantly—an adaptable, hands-on, and inspiring leader. Any team would be lucky to have him!</div>
         <div class="testimonial-author">
           <img
             class="testimonial-avatar"
@@ -1077,7 +1022,7 @@
       </div>
 
       <div class="testimonial-card">
-        <div class="testimonial-quote">Having Hamed in your team brings a great sense of confidence. He can be a key member of any team. Hamed is hardworking and has a strong ability to manage both tasks and people. He can lead important projects to success.<br>  </div>
+        <div class="testimonial-quote">Having Hamed in your team brings a great sense of confidence. He can be a key member of any team. Hamed is hardworking and has a strong ability to manage both tasks and people. He can lead important projects to success.</div>
         <div class="testimonial-author">
           <img
             class="testimonial-avatar"
@@ -1107,17 +1052,27 @@
   <div class="container contact-grid">
     <div class="contact-left">
       <span class="eyebrow">Get in Touch</span>
-      <h2>Let's Work<br><em>Together</em></h2>
+      <h2>Let's Work <em>Together</em></h2>
       <p>I'm open to freelance projects, contract engagements, and full-time opportunities in instructional design and eLearning development — particularly in London and across the UK.</p>
 
       <div class="contact-items">
-        <a href="/cdn-cgi/l/email-protection#422a232f27266c262d2e2336292a232a2b02252f232b2e6c212d2f" class="contact-item">
+                <!--
+          EMAIL ROW — clicking anywhere copies the address and briefly shows "Copied!".
+          Update data-email if your address changes.
+        -->
+        <button
+          class="contact-item"
+          onclick="copyContactEmail(this)"
+          data-email="hamed.dolatkhahi@gmail.com"
+          style="width:100%;text-align:left;cursor:pointer;border:1px solid var(--paper-dark);background:var(--white);border-radius:var(--radius);"
+          aria-label="Copy email address"
+        >
           <div class="contact-item-icon"><img src="images/data-analysis.png" alt="" aria-hidden="true" /></div>
           <div class="contact-item-text">
-            <span class="contact-item-label">Email</span>
-            <span class="contact-item-value"><span class="__cf_email__" data-cfemail="fd959c909899d39992919c8996959c9594bd9a909c9491d39e9290">[email&#160;protected]</span></span>
+            <span class="contact-item-label">Email — click to copy</span>
+            <span class="contact-item-value" id="email-display">hamed.dolatkhahi@gmail.com</span>
           </div>
-        </a>
+        </button>
         <a href="https://linkedin.com/in/hamed-dolatkhahi" target="_blank" rel="noopener" class="contact-item">
           <div class="contact-item-icon"><img src="images/data-analysis.png" alt="" aria-hidden="true" /></div>
           <div class="contact-item-text">
@@ -1126,50 +1081,11 @@
           </div>
         </a>
       </div>
-
-      <button class="copy-email-btn" id="copy-email-btn" onclick="copyEmail()">
-        📋 Copy Email Address
-      </button>
 <!--
       <div class="contact-note">
         I prefer being reached via email or LinkedIn — both go directly to me. I aim to reply within 1–2 business days.
       </div>
 -->
-      <div class="social-strip">
-        <a href="https://linkedin.com/in/hamed-dolatkhahi" target="_blank" rel="noopener" class="social-link">LinkedIn</a>
-        <!-- Add more: <a href="#" class="social-link">Twitter / X</a> -->
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ══════════════════════════════════════
-     DOWNLOADABLE FILES
-     Add/remove .download-file links as needed.
-     Update href to your Google Drive download link:
-     https://drive.google.com/uc?export=download&id=YOUR_FILE_ID
-══════════════════════════════════════ -->
-<section id="downloads">
-  <div class="downloads-inner">
-    <span class="downloads-label">Downloads</span>
-    <div class="downloads-files">
-      <!--
-        RESUME PDF — replace the href with your Google Drive PDF link.
-        Use export=download to force a direct download:
-        href="https://drive.google.com/uc?export=download&id=YOUR_RESUME_FILE_ID"
-        For now it points to the photo as a placeholder.
-      -->
-      <a href="https://drive.google.com/uc?export=view&id=1bfe9gCEnVKeiT_jkCP8AWKxov8GAROQd"
-         target="_blank" rel="noopener" class="download-file">
-        <span class="download-file-icon">&#x2913;</span> Resume / CV (PDF)
-      </a>
-      <!--
-        Add more downloadable files here as needed. Example:
-        <a href="https://drive.google.com/uc?export=download&id=YOUR_ID"
-           target="_blank" rel="noopener" class="download-file">
-          &#x2913; Portfolio Deck (PDF)
-        </a>
-      -->
     </div>
   </div>
 </section>
@@ -1243,25 +1159,23 @@
     }, { threshold: 0.15 }).observe(item);
   });
 
-  /* ── Project filter ── */
-  document.querySelectorAll('.filter-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      const filter = btn.dataset.filter;
-      document.querySelectorAll('.project-card').forEach(card => {
-        card.style.display = (filter === 'all' || card.dataset.category === filter) ? '' : 'none';
-      });
-    });
-  });
 
-  /* ── Copy email ── */
-  function copyEmail() {
-    navigator.clipboard.writeText('hamed.dolatkhahi@gmail.com').then(() => {
-      const btn = document.getElementById('copy-email-btn');
-      btn.textContent = '✓ Copied!';
-      btn.classList.add('copied');
-      setTimeout(() => { btn.textContent = '📋 Copy Email Address'; btn.classList.remove('copied'); }, 2500);
+  /* ── Copy email on row click ── */
+  function copyContactEmail(btn) {
+    const email = btn.getAttribute('data-email');
+    navigator.clipboard.writeText(email).then(() => {
+      const display = document.getElementById('email-display');
+      const label   = btn.querySelector('.contact-item-label');
+      const origVal = display.textContent;
+      const origLbl = label.textContent;
+      display.textContent = '✓ Copied!';
+      label.textContent   = 'Email';
+      btn.style.borderColor = 'var(--accent)';
+      setTimeout(() => {
+        display.textContent = origVal;
+        label.textContent   = origLbl;
+        btn.style.borderColor = '';
+      }, 2000);
     });
   }
 
