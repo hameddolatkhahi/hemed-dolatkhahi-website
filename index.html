@@ -107,6 +107,9 @@
     font-family: var(--font-display);
     font-size: 1.2rem; font-weight: var(--display-weight);
     color: var(--ink); transition: color var(--transition);
+    display: flex; flex-direction: column;
+    justify-content: center; line-height: 1.2;
+    gap: 0.1rem; overflow: hidden;
   }
   .nav-logo span { color: var(--accent); }
   .nav-logo:hover { color: var(--accent); }
@@ -406,7 +409,7 @@
     font-weight: var(--display-weight); color: var(--paper);
   }
   .testimonials-header h2 em { font-style: var(--display-style); color: var(--gold); }
-  .testimonials-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px,1fr)); gap: 1.5rem; align-items: stretch; }
+  .testimonials-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px,1fr)); gap: 1.5rem; align-items: stretch; }
   .testimonial-card {
     background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08);
     border-radius: var(--radius); padding: 2rem;
@@ -519,7 +522,7 @@
      FOOTER
   ══════════════════════════════════════════════ */
   footer { background: var(--ink); color: rgba(255,255,255,0.5); padding: 2rem; }
-  .footer-inner { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.75rem; }
+  .footer-inner { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
   .footer-logo { font-family: var(--font-display); font-size: 1rem; font-weight: var(--display-weight); color: rgba(255,255,255,0.7); }
   .footer-copy { font-size: 0.76rem; }
   .footer-links { display: flex; gap: 1.5rem; list-style: none; }
@@ -564,23 +567,16 @@
   @media (max-width: 900px) {
     #hero { grid-template-columns: 1fr; }
     .hero-bg-stripe { display: none; }
-    .hero-content { padding: 3rem 1.5rem 1rem 1.5rem; }
-    .hero-visual { padding: 2rem 1.5rem; }
+    .hero-content { padding: 3rem 0 1rem; }
+    .hero-visual { padding: 2rem 0; }
     .about-grid { grid-template-columns: 1fr; gap: 2rem; }
     .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; }
     .about-highlights { grid-template-columns: 1fr; }
-    .about-photo { aspect-ratio: 1/1; max-width: 220px; }
   }
   @media (max-width: 640px) {
     .nav-links { display: none; }
     .nav-hamburger { display: flex; }
     .projects-grid, .blog-grid { grid-template-columns: 1fr; }
-    .nav-logo-subtitle { display: none; }
-    .nav-resume { display: none; }
-    .skill-chip { white-space: normal; }
-    .skills-panel.active { gap: 0.4rem; }
-    .footer-inner { flex-direction: column; text-align: center; }
-    .footer-links { justify-content: center; }
   }
 
   .mobile-nav {
@@ -626,7 +622,7 @@
 ══════════════════════════════════════ -->
 <nav id="site-nav">
   <div class="container nav-inner">
-    <a href="#hero" class="nav-logo" style="display:flex;flex-direction:column;line-height:1.15;gap:0.05rem;">
+    <a href="#hero" class="nav-logo">
       <span>Hamed <span style="color:var(--accent);">Dolatkhahi</span></span>
       <span class="nav-logo-subtitle" style="font-size:0.55rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-faint);font-family:var(--font-mono);font-weight:400;">Instructional Designer &amp; eLearning Developer</span>
     </a>
@@ -668,7 +664,7 @@
 ══════════════════════════════════════ -->
 <section id="hero">
   <div class="hero-bg-stripe"></div>
-  <div class="hero-content container">
+  <div class="hero-content container" style="padding-left:7rem;padding-right:1rem;max-width:660px;margin:0;">
     <div class="hero-label">Instructional Designer · eLearning Developer</div>
     <h1 class="hero-name">Hamed<br><em>Dolatkhahi</em></h1>
     <p class="hero-title">Designing Learning Experiences that Drive Performance</p>
