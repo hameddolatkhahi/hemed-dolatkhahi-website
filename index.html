@@ -108,8 +108,8 @@
     font-size: 1.2rem; font-weight: var(--display-weight);
     color: var(--ink); transition: color var(--transition);
     display: flex; flex-direction: column;
-    justify-content: center; line-height: 1.2;
-    gap: 0.1rem; overflow: hidden;
+    justify-content: center; line-height: 1.2; gap: 0.1rem;
+    overflow: hidden; max-height: 64px;
   }
   .nav-logo span { color: var(--accent); }
   .nav-logo:hover { color: var(--accent); }
@@ -166,9 +166,10 @@
     animation: fadeUp 0.9s ease both;
   }
   .hero-label {
-    font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.2em;
+    font-family: var(--font-mono); font-size: 0.65rem; letter-spacing: 0.15em;
     text-transform: uppercase; color: var(--accent);
-    display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1.5rem;
+    display: flex; align-items: center; gap: 0.6rem; margin-bottom: 1.5rem;
+    white-space: nowrap; flex-wrap: nowrap;
   }
   .hero-label::before { content: ''; display: block; width: 32px; height: 1px; background: var(--accent); }
 
@@ -409,7 +410,7 @@
     font-weight: var(--display-weight); color: var(--paper);
   }
   .testimonials-header h2 em { font-style: var(--display-style); color: var(--gold); }
-  .testimonials-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px,1fr)); gap: 1.5rem; align-items: stretch; }
+  .testimonials-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px,1fr)); gap: 1.5rem; align-items: stretch; }
   .testimonial-card {
     background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08);
     border-radius: var(--radius); padding: 2rem;
@@ -567,16 +568,28 @@
   @media (max-width: 900px) {
     #hero { grid-template-columns: 1fr; }
     .hero-bg-stripe { display: none; }
-    .hero-content { padding: 3rem 0 1rem; }
-    .hero-visual { padding: 2rem 0; }
+    .hero-content { padding: 3rem 1.5rem 1rem 1.5rem; }
+    .hero-visual { padding: 2rem 1.5rem; }
     .about-grid { grid-template-columns: 1fr; gap: 2rem; }
     .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; }
     .about-highlights { grid-template-columns: 1fr; }
+    .about-photo { aspect-ratio: 1/1; max-width: 220px; }
   }
   @media (max-width: 640px) {
     .nav-links { display: none; }
     .nav-hamburger { display: flex; }
     .projects-grid, .blog-grid { grid-template-columns: 1fr; }
+    /* Hide nav subtitle & resume button on small screens */
+    .nav-logo-subtitle { display: none; }
+    .nav-resume { display: none; }
+    /* Allow skill chips to wrap text on narrow screens */
+    .skill-chip { white-space: normal; }
+    .skills-panel.active { gap: 0.4rem; }
+    /* Stack footer items */
+    .footer-inner { flex-direction: column; text-align: center; }
+    .footer-links { justify-content: center; }
+    /* Lower testimonial card min-width */
+    .testimonials-grid { grid-template-columns: 1fr; }
   }
 
   .mobile-nav {
@@ -664,7 +677,7 @@
 ══════════════════════════════════════ -->
 <section id="hero">
   <div class="hero-bg-stripe"></div>
-  <div class="hero-content container" style="padding-left:7rem;padding-right:1rem;max-width:660px;margin:0;">
+  <div class="hero-content container" >
     <div class="hero-label">Instructional Designer · eLearning Developer</div>
     <h1 class="hero-name">Hamed<br><em>Dolatkhahi</em></h1>
     <p class="hero-title">Designing Learning Experiences that Drive Performance</p>
